@@ -422,6 +422,28 @@
     color: #999;
   }
 
+  /* Period tabs (weight chart) */
+  .period-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .period-tab {
+    flex: 1;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    color: #999;
+    background: #f5f5f5;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .period-tab.active {
+    background: #e8b4c8;
+    color: #fff;
+    font-weight: 600;
+  }
+
   /* Cycle history items */
   .cycle-history-item {
     display: flex;
@@ -852,7 +874,13 @@
   <div id="weight-view" style="display:none;">
     <div style="padding:0 20px 16px;">
       <div class="stats-chart" style="margin:0;">
-        <h4>📉 최근 30일 체중</h4>
+        <div class="period-tabs">
+          <span class="period-tab" onclick="selectPeriodTab(this)">1주</span>
+          <span class="period-tab active" onclick="selectPeriodTab(this)">1개월</span>
+          <span class="period-tab" onclick="selectPeriodTab(this)">3개월</span>
+          <span class="period-tab" onclick="selectPeriodTab(this)">6개월</span>
+          <span class="period-tab" onclick="selectPeriodTab(this)">1년</span>
+        </div>
         <div class="chart-area">
           <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
             <defs>
@@ -941,6 +969,11 @@ function togglePeriod() {
     btn.classList.add('active');
     text.textContent = '생리 중 · 탭하여 종료';
   }
+}
+
+function selectPeriodTab(el) {
+  document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
 }
 
 function toggleExpand() {
