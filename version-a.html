@@ -422,6 +422,22 @@
     color: #999;
   }
 
+  /* Y-axis labels */
+  .y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 4px 0;
+    width: 28px;
+    flex-shrink: 0;
+  }
+  .y-axis span {
+    font-size: 10px;
+    color: #bbb;
+    text-align: right;
+    padding-right: 4px;
+  }
+
   /* Period tabs (weight chart) */
   .period-tabs {
     display: flex;
@@ -882,8 +898,14 @@
           <span class="period-tab" onclick="selectPeriodTab(this)">1년</span>
           <span class="period-tab" onclick="selectPeriodTab(this)">전체</span>
         </div>
-        <div class="chart-area">
-          <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
+        <div class="chart-area" style="display:flex;gap:0;">
+          <div class="y-axis">
+            <span>60</span>
+            <span>58</span>
+            <span>56</span>
+            <span>54</span>
+          </div>
+          <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none" style="flex:1;">
             <defs>
               <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" style="stop-color:#e8b4c8;stop-opacity:0.3"/>
