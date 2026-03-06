@@ -53,18 +53,18 @@
   }
 
   .cycle-ring {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     border: 7px solid #f0d4e0;
-    margin: 16px auto;
+    margin: 12px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #fdf2f6 0%, #fff 100%);
   }
-  .cycle-ring .day-count { font-size: 38px; font-weight: 700; color: #c77d9a; line-height: 1; }
+  .cycle-ring .day-count { font-size: 32px; font-weight: 700; color: #c77d9a; line-height: 1; }
   .cycle-ring .day-label { font-size: 11px; color: #bbb; margin-bottom: 2px; letter-spacing: 1px; }
   .cycle-ring .divider { width: 30px; height: 1px; background: #e8d0dc; margin: 6px auto; }
   .cycle-ring .phase { font-size: 12px; color: #c77d9a; font-weight: 600; }
@@ -668,64 +668,9 @@
       </div>
     </div>
 
-    <!-- 더 기록하기 버튼 -->
-    <div id="expandBtn" style="text-align:center;padding:12px 0;cursor:pointer;" onclick="toggleExpand()">
-      <span style="font-size:13px;color:#c77d9a;font-weight:600;">＋ 더 기록하기 (생리량 · 기분 · 증상 · 메모)</span>
-    </div>
-
-    <!-- 확장 영역 (숨김) -->
-    <div id="expandArea" style="display:none;">
-      <div class="record-section">
-        <h4>🩸 생리량</h4>
-        <div class="flow-row">
-          <div class="flow-option" onclick="selectFlow(this)">
-            <div class="flow-dot"></div>
-            <span>적음</span>
-          </div>
-          <div class="flow-option" onclick="selectFlow(this)">
-            <div class="flow-dot"></div>
-            <span>보통</span>
-          </div>
-          <div class="flow-option" onclick="selectFlow(this)">
-            <div class="flow-dot"></div>
-            <span>많음</span>
-          </div>
-          <div class="flow-option selected" onclick="selectFlow(this)">
-            <div class="flow-dot"></div>
-            <span>없음</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="record-section">
-        <h4>😊 기분</h4>
-        <div class="mood-row">
-          <div class="mood-item" onclick="selectMood(this)">😢<div class="mood-label">슬픔</div></div>
-          <div class="mood-item" onclick="selectMood(this)">😐<div class="mood-label">보통</div></div>
-          <div class="mood-item selected" onclick="selectMood(this)">😊<div class="mood-label">좋음</div></div>
-          <div class="mood-item" onclick="selectMood(this)">😍<div class="mood-label">최고</div></div>
-          <div class="mood-item" onclick="selectMood(this)">😡<div class="mood-label">짜증</div></div>
-        </div>
-      </div>
-
-      <div class="record-section">
-        <h4>🤕 증상</h4>
-        <div class="symptom-tags">
-          <span class="symptom-tag" onclick="this.classList.toggle('selected')">복통</span>
-          <span class="symptom-tag" onclick="this.classList.toggle('selected')">두통</span>
-          <span class="symptom-tag selected" onclick="this.classList.toggle('selected')">피로</span>
-          <span class="symptom-tag" onclick="this.classList.toggle('selected')">부종</span>
-          <span class="symptom-tag" onclick="this.classList.toggle('selected')">요통</span>
-          <span class="symptom-tag" onclick="this.classList.toggle('selected')">유방통</span>
-          <span class="symptom-tag" onclick="this.classList.toggle('selected')">불면</span>
-          <span class="symptom-tag" onclick="this.classList.toggle('selected')">식욕변화</span>
-        </div>
-      </div>
-
-      <div class="record-section">
-        <h4>📝 메모</h4>
-        <textarea class="memo-input" placeholder="오늘 특이사항이 있다면..."></textarea>
-      </div>
+    <div class="record-section">
+      <h4>📝 메모</h4>
+      <textarea class="memo-input" placeholder="오늘 특이사항이 있다면..." style="height:60px;"></textarea>
     </div>
   </div>
 
