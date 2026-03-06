@@ -543,35 +543,35 @@
       </div>
     </div>
 
-    <div class="record-section">
-      <h4>🩸 생리량</h4>
-      <div class="flow-row">
-        <div class="flow-option" onclick="selectFlow(this)">
-          <div class="flow-dot"></div>
-          <span>적음</span>
-        </div>
-        <div class="flow-option" onclick="selectFlow(this)">
-          <div class="flow-dot"></div>
-          <span>보통</span>
-        </div>
-        <div class="flow-option" onclick="selectFlow(this)">
-          <div class="flow-dot"></div>
-          <span>많음</span>
-        </div>
-        <div class="flow-option selected" onclick="selectFlow(this)">
-          <div class="flow-dot"></div>
-          <span>없음</span>
-        </div>
-      </div>
-    </div>
-
     <!-- 더 기록하기 버튼 -->
     <div id="expandBtn" style="text-align:center;padding:12px 0;cursor:pointer;" onclick="toggleExpand()">
-      <span style="font-size:13px;color:#c77d9a;font-weight:600;">＋ 더 기록하기 (기분 · 증상 · 메모)</span>
+      <span style="font-size:13px;color:#c77d9a;font-weight:600;">＋ 더 기록하기 (생리량 · 기분 · 증상 · 메모)</span>
     </div>
 
     <!-- 확장 영역 (숨김) -->
     <div id="expandArea" style="display:none;">
+      <div class="record-section">
+        <h4>🩸 생리량</h4>
+        <div class="flow-row">
+          <div class="flow-option" onclick="selectFlow(this)">
+            <div class="flow-dot"></div>
+            <span>적음</span>
+          </div>
+          <div class="flow-option" onclick="selectFlow(this)">
+            <div class="flow-dot"></div>
+            <span>보통</span>
+          </div>
+          <div class="flow-option" onclick="selectFlow(this)">
+            <div class="flow-dot"></div>
+            <span>많음</span>
+          </div>
+          <div class="flow-option selected" onclick="selectFlow(this)">
+            <div class="flow-dot"></div>
+            <span>없음</span>
+          </div>
+        </div>
+      </div>
+
       <div class="record-section">
         <h4>😊 기분</h4>
         <div class="mood-row">
@@ -948,7 +948,7 @@ function toggleExpand() {
     btn.innerHTML = '<span style="font-size:13px;color:#999;font-weight:600;">▲ 접기</span>';
   } else {
     area.style.display = 'none';
-    btn.innerHTML = '<span style="font-size:13px;color:#c77d9a;font-weight:600;">＋ 더 기록하기 (기분 · 증상 · 메모)</span>';
+    btn.innerHTML = '<span style="font-size:13px;color:#c77d9a;font-weight:600;">＋ 더 기록하기 (생리량 · 기분 · 증상 · 메모)</span>';
   }
 }
 
