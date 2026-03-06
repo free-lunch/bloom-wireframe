@@ -489,7 +489,7 @@
 <body>
 
 <div class="page-info">
-  🌸 Bloom Wireframe v0.5 — 체중↔주기 순서 변경
+  🌸 Bloom Wireframe v0.6 — 통계탭: 주기(왼) / 체중(오) 토글
 </div>
 
 <!-- ==================== HOME SCREEN ==================== -->
@@ -681,35 +681,22 @@
 
 <!-- ==================== CYCLE/PERIOD SCREEN ==================== -->
 <div id="cycle" class="screen">
-  <!-- 체중 그래프 (상단) -->
   <div style="padding:20px 20px 0;">
-    <div class="stats-chart" style="margin:0;">
-      <h4>📉 최근 30일 체중</h4>
-      <div class="chart-area">
-        <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style="stop-color:#e8b4c8;stop-opacity:0.3"/>
-              <stop offset="100%" style="stop-color:#e8b4c8;stop-opacity:0"/>
-            </linearGradient>
-          </defs>
-          <line x1="0" y1="85" x2="300" y2="85" stroke="#5fa88a" stroke-width="1" stroke-dasharray="4"/>
-          <path d="M0,20 L30,25 L60,22 L90,30 L120,28 L150,35 L180,32 L210,40 L240,38 L270,42 L300,45"
-                fill="none" stroke="#c77d9a" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M0,20 L30,25 L60,22 L90,30 L120,28 L150,35 L180,32 L210,40 L240,38 L270,42 L300,45 L300,100 L0,100Z"
-                fill="url(#grad)"/>
-          <circle cx="300" cy="45" r="4" fill="#c77d9a" stroke="#fff" stroke-width="2"/>
-        </svg>
-      </div>
-      <div class="chart-labels">
-        <span>2/5</span><span>2/12</span><span>2/19</span><span>2/26</span><span>3/6</span>
-      </div>
-    </div>
+    <h2 style="font-size:18px;color:#333;text-align:center;margin-bottom:16px;">📊 통계</h2>
   </div>
 
+  <!-- 토글: 주기(왼쪽) / 체중(오른쪽) -->
+  <div class="stats-toggle" style="margin:0 20px 16px;">
+    <button class="active" onclick="toggleMainView(this, 'cycle-view')">주기</button>
+    <button onclick="toggleMainView(this, 'weight-view')">체중</button>
+  </div>
+
+  <!-- === 주기 뷰 === -->
+  <div id="cycle-view">
+
   <!-- 주기 요약 카드 -->
-  <div style="padding:20px;">
-    <h2 style="font-size:18px;color:#333;text-align:center;margin-bottom:16px;">🩸 생리 주기</h2>
+  <div style="padding:0 20px 20px;">
+    <h3 style="font-size:15px;color:#666;margin-bottom:12px;">🩸 생리 주기</h3>
     
     <div class="stats-cards" style="padding:0;">
       <div class="stats-card">
@@ -754,7 +741,7 @@
     </div>
   </div>
 
-  <!-- 토글: 지난 기간 / 예상 기간 -->
+  <!-- 서브 토글: 지난 기간 / 예상 기간 -->
   <div class="stats-toggle" style="margin:0 20px 12px;">
     <button class="active" onclick="toggleCycleView(this, 'past')">지난 기간</button>
     <button onclick="toggleCycleView(this, 'predicted')">예상 기간</button>
@@ -848,6 +835,60 @@
     </div>
   </div>
 
+  </div><!-- end cycle-view -->
+
+  <!-- === 체중 뷰 === -->
+  <div id="weight-view" style="display:none;">
+    <div style="padding:0 20px 16px;">
+      <div class="stats-chart" style="margin:0;">
+        <h4>📉 최근 30일 체중</h4>
+        <div class="chart-area">
+          <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#e8b4c8;stop-opacity:0.3"/>
+                <stop offset="100%" style="stop-color:#e8b4c8;stop-opacity:0"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="85" x2="300" y2="85" stroke="#5fa88a" stroke-width="1" stroke-dasharray="4"/>
+            <path d="M0,20 L30,25 L60,22 L90,30 L120,28 L150,35 L180,32 L210,40 L240,38 L270,42 L300,45"
+                  fill="none" stroke="#c77d9a" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M0,20 L30,25 L60,22 L90,30 L120,28 L150,35 L180,32 L210,40 L240,38 L270,42 L300,45 L300,100 L0,100Z"
+                  fill="url(#grad2)"/>
+            <circle cx="300" cy="45" r="4" fill="#c77d9a" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="chart-labels">
+          <span>2/5</span><span>2/12</span><span>2/19</span><span>2/26</span><span>3/6</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-cards" style="padding:0 20px 20px;">
+      <div class="stats-card">
+        <div class="sc-icon">⚖️</div>
+        <div class="sc-value">58.2</div>
+        <div class="sc-label">현재 체중 (kg)</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">🎯</div>
+        <div class="sc-value">55.0</div>
+        <div class="sc-label">목표 체중 (kg)</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">📉</div>
+        <div class="sc-value">-0.9</div>
+        <div class="sc-label">총 변화</div>
+        <div class="sc-sub">시작: 59.1kg</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">📅</div>
+        <div class="sc-value">-0.3</div>
+        <div class="sc-label">이번 주</div>
+        <div class="sc-sub">▼ 감소 중</div>
+      </div>
+    </div>
+  </div><!-- end weight-view -->
 
 </div>
 
@@ -862,8 +903,8 @@
     <div class="tab-label">캘린더</div>
   </div>
   <div class="tab-item" onclick="showScreen('cycle')">
-    <div class="tab-icon">🩸</div>
-    <div class="tab-label">주기</div>
+    <div class="tab-icon">📊</div>
+    <div class="tab-label">통계</div>
   </div>
 </div>
 
@@ -901,8 +942,15 @@ function selectFlow(el) {
   el.classList.add('selected');
 }
 
+function toggleMainView(btn, viewId) {
+  btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('cycle-view').style.display = viewId === 'cycle-view' ? 'block' : 'none';
+  document.getElementById('weight-view').style.display = viewId === 'weight-view' ? 'block' : 'none';
+}
+
 function toggleCycleView(btn, view) {
-  document.querySelectorAll('.stats-toggle button').forEach(b => b.classList.remove('active'));
+  btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('past-cycles').style.display = view === 'past' ? 'block' : 'none';
   document.getElementById('predicted-cycles').style.display = view === 'predicted' ? 'block' : 'none';
