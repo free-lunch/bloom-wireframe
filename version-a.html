@@ -31,26 +31,50 @@
   /* ===== HOME SCREEN ===== */
   .home-header {
     text-align: center;
-    padding: 20px 20px 0;
+    padding: 12px 20px 0;
   }
-  .home-header h1 { font-size: 24px; color: #c77d9a; }
-  .home-header p { font-size: 13px; color: #999; margin-top: 4px; }
+  .home-header h1 { font-size: 20px; color: #c77d9a; }
+  .home-header p { font-size: 12px; color: #999; margin-top: 2px; }
 
   .cycle-ring {
-    width: 180px;
-    height: 180px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    border: 8px solid #f0d4e0;
-    margin: 20px auto;
+    border: 6px solid #f0d4e0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #fdf2f6 0%, #fff 100%);
+    flex-shrink: 0;
   }
-  .cycle-ring .day-count { font-size: 44px; font-weight: 700; color: #c77d9a; }
-  .cycle-ring .day-label { font-size: 13px; color: #999; margin-top: 2px; }
-  .cycle-ring .phase { font-size: 13px; color: #e8b4c8; font-weight: 600; margin-top: 6px; }
+  .cycle-ring .day-count { font-size: 32px; font-weight: 700; color: #c77d9a; }
+  .cycle-ring .day-label { font-size: 11px; color: #999; margin-top: 1px; }
+  .cycle-ring .phase { font-size: 11px; color: #e8b4c8; font-weight: 600; margin-top: 4px; }
+
+  .home-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+  .home-top-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fdf8fa;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  .info-row .info-label { color: #999; }
+  .info-row .info-value { font-weight: 600; color: #333; }
 
   .quick-stats {
     display: grid;
@@ -499,35 +523,28 @@
     <p>2026년 3월 6일 금요일</p>
   </div>
 
-  <div class="cycle-ring">
-    <div class="day-count">14</div>
-    <div class="day-label">일째</div>
-    <div class="phase">🌱 배란기</div>
-  </div>
-
-  <!-- 생리 시작/끝 버튼 -->
-  <div class="period-toggle" onclick="togglePeriod()">
-    <div class="period-toggle-inner" id="periodBtn">
-      <span class="period-icon">🩸</span>
-      <span class="period-text">생리 시작</span>
+  <div class="home-top">
+    <div class="cycle-ring">
+      <div class="day-count">14</div>
+      <div class="day-label">일째</div>
+      <div class="phase">🌱 배란기</div>
     </div>
-  </div>
-
-  <div class="quick-stats">
-    <div class="stat-card">
-      <div class="icon">⚖️</div>
-      <div class="value">58.2kg</div>
-      <div class="label">오늘 체중</div>
-    </div>
-    <div class="stat-card">
-      <div class="icon">🩸</div>
-      <div class="value">5일 후</div>
-      <div class="label">다음 생리</div>
-    </div>
-    <div class="stat-card">
-      <div class="icon">🔄</div>
-      <div class="value">28일</div>
-      <div class="label">평균 주기</div>
+    <div class="home-top-info">
+      <div class="info-row">
+        <span class="info-label">🩸 다음 생리</span>
+        <span class="info-value">5일 후</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">🔄 평균 주기</span>
+        <span class="info-value">28일</span>
+      </div>
+      <!-- 생리 시작 버튼 -->
+      <div class="period-toggle" onclick="togglePeriod()" style="margin:0;">
+        <div class="period-toggle-inner" id="periodBtn" style="padding:8px 16px;justify-content:center;">
+          <span class="period-icon" style="font-size:16px;">🩸</span>
+          <span class="period-text" style="font-size:13px;">생리 시작</span>
+        </div>
+      </div>
     </div>
   </div>
 
