@@ -32,9 +32,25 @@
   .home-header {
     text-align: center;
     padding: 16px 20px 0;
+    position: relative;
   }
   .home-header h1 { font-size: 22px; color: #c77d9a; }
   .home-header p { font-size: 13px; color: #999; margin-top: 3px; }
+  .settings-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fdf2f6;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .cycle-ring {
     width: 150px;
@@ -422,6 +438,57 @@
     color: #999;
   }
 
+  /* Settings */
+  .settings-section {
+    margin-bottom: 20px;
+  }
+  .settings-title {
+    font-size: 14px;
+    color: #c77d9a;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: #fdf8fa;
+    border-radius: 12px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #333;
+  }
+  .settings-value {
+    color: #999;
+    font-size: 14px;
+  }
+  .toggle-switch {
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+    background: #ddd;
+    position: relative;
+    cursor: pointer;
+  }
+  .toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    top: 2px;
+    left: 2px;
+    transition: 0.2s;
+  }
+  .toggle-switch.on {
+    background: #c77d9a;
+  }
+  .toggle-switch.on::after {
+    left: 22px;
+  }
+
   /* Weight log list */
   .weight-log-item {
     display: flex;
@@ -569,6 +636,7 @@
   <div class="home-header">
     <h1>Bloom 🌸</h1>
     <p>2026년 3월 6일 금요일</p>
+    <button class="settings-btn" onclick="showScreen('settings')">⚙️</button>
   </div>
 
   <div class="cycle-ring">
@@ -1037,6 +1105,98 @@
 
 </div>
 
+<!-- ===== SETTINGS SCREEN ===== -->
+<div class="screen" id="settings-screen" style="display:none;">
+  <div style="padding:20px;">
+    <div style="display:flex;align-items:center;margin-bottom:20px;">
+      <button onclick="showScreen('home')" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0;margin-right:12px;">←</button>
+      <h2 style="font-size:20px;color:#333;margin:0;">설정</h2>
+    </div>
+
+    <!-- 내 정보 -->
+    <div class="settings-section">
+      <h3 class="settings-title">👤 내 정보</h3>
+      <div class="settings-item">
+        <span>생년월일</span>
+        <span class="settings-value">1995.03.15</span>
+      </div>
+      <div class="settings-item">
+        <span>평균 주기</span>
+        <span class="settings-value">28일</span>
+      </div>
+      <div class="settings-item">
+        <span>평균 생리 기간</span>
+        <span class="settings-value">5일</span>
+      </div>
+    </div>
+
+    <!-- 체중 목표 -->
+    <div class="settings-section">
+      <h3 class="settings-title">⚖️ 체중 목표</h3>
+      <div class="settings-item">
+        <span>목표 체중</span>
+        <span class="settings-value">55.0 kg</span>
+      </div>
+      <div class="settings-item">
+        <span>단위</span>
+        <span class="settings-value">kg</span>
+      </div>
+    </div>
+
+    <!-- 알림 -->
+    <div class="settings-section">
+      <h3 class="settings-title">🔔 알림</h3>
+      <div class="settings-item">
+        <span>생리 예정일 알림</span>
+        <div class="toggle-switch on"></div>
+      </div>
+      <div class="settings-item">
+        <span>자동종료 알림</span>
+        <div class="toggle-switch on"></div>
+      </div>
+      <div class="settings-item">
+        <span>체중 기록 리마인더</span>
+        <span class="settings-value">매일 08:00</span>
+      </div>
+    </div>
+
+    <!-- 보안 -->
+    <div class="settings-section">
+      <h3 class="settings-title">🔒 보안</h3>
+      <div class="settings-item">
+        <span>앱 잠금</span>
+        <div class="toggle-switch on"></div>
+      </div>
+      <div class="settings-item">
+        <span>잠금 방식</span>
+        <span class="settings-value">Face ID</span>
+      </div>
+      <div class="settings-item">
+        <span>잠금 타이밍</span>
+        <span class="settings-value">즉시</span>
+      </div>
+    </div>
+
+    <!-- 데이터 -->
+    <div class="settings-section">
+      <h3 class="settings-title">📦 데이터</h3>
+      <div class="settings-item">
+        <span>데이터 백업</span>
+        <span class="settings-value">›</span>
+      </div>
+      <div class="settings-item">
+        <span>데이터 내보내기 (CSV)</span>
+        <span class="settings-value">›</span>
+      </div>
+      <div class="settings-item" style="color:#e8837c;">
+        <span>계정 삭제</span>
+        <span class="settings-value" style="color:#e8837c;">›</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ===== BOTTOM TAB BAR ===== -->
 <div class="tab-bar">
   <div class="tab-item active" onclick="showScreen('home')">
@@ -1058,10 +1218,19 @@ const screens = ['home', 'calendar', 'cycle'];
 
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-  const idx = screens.indexOf(id);
-  if (idx >= 0) document.querySelectorAll('.tab-item')[idx].classList.add('active');
+  if (id === 'settings') {
+    document.getElementById('settings-screen').style.display = 'block';
+    document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+    document.getElementById('settings-screen').style.display = 'block';
+    document.querySelector('.tab-bar').style.display = 'none';
+  } else {
+    document.getElementById('settings-screen').style.display = 'none';
+    document.querySelector('.tab-bar').style.display = 'flex';
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+    const idx = screens.indexOf(id);
+    if (idx >= 0) document.querySelectorAll('.tab-item')[idx].classList.add('active');
+  }
   window.scrollTo(0, 0);
 }
 
