@@ -48,9 +48,10 @@
     justify-content: center;
     background: linear-gradient(135deg, #fdf2f6 0%, #fff 100%);
   }
-  .cycle-ring .day-count { font-size: 38px; font-weight: 700; color: #c77d9a; }
-  .cycle-ring .day-label { font-size: 12px; color: #999; margin-top: 2px; }
-  .cycle-ring .phase { font-size: 12px; color: #e8b4c8; font-weight: 600; margin-top: 5px; }
+  .cycle-ring .day-count { font-size: 38px; font-weight: 700; color: #c77d9a; line-height: 1; }
+  .cycle-ring .day-label { font-size: 11px; color: #bbb; margin-top: 6px; letter-spacing: 1px; }
+  .cycle-ring .divider { width: 30px; height: 1px; background: #e8d0dc; margin: 6px auto; }
+  .cycle-ring .phase { font-size: 12px; color: #c77d9a; font-weight: 600; }
 
   .quick-stats {
     display: grid;
@@ -502,6 +503,7 @@
   <div class="cycle-ring">
     <div class="day-count">D-5</div>
     <div class="day-label">다음 생리</div>
+    <div class="divider"></div>
     <div class="phase">🌱 배란기</div>
   </div>
 
