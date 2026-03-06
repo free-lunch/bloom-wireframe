@@ -26,28 +26,13 @@
     text-decoration: none;
     color: #333;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    transition: transform 0.1s;
   }
-  .version-item:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
   .version-item.latest { border-left: 4px solid #c77d9a; }
-  .v-num {
-    font-size: 20px;
-    font-weight: 700;
-    color: #c77d9a;
-    width: 40px;
-    flex-shrink: 0;
-  }
+  .v-num { font-size: 20px; font-weight: 700; color: #c77d9a; width: 44px; flex-shrink: 0; }
   .v-info { flex: 1; }
   .v-title { font-size: 14px; font-weight: 600; }
   .v-desc { font-size: 12px; color: #999; margin-top: 2px; }
-  .v-badge {
-    font-size: 10px;
-    background: #c77d9a;
-    color: #fff;
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-weight: 600;
-  }
+  .v-badge { font-size: 10px; background: #c77d9a; color: #fff; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -56,13 +41,20 @@
 <p class="subtitle">와이어프레임 버전 히스토리</p>
 
 <div class="version-list">
-  <a class="version-item latest" href="v9.html">
+  <a class="version-item latest" href="v10.html">
+    <div class="v-num">v10</div>
+    <div class="v-info">
+      <div class="v-title">체중 입력 카드형 리디자인</div>
+      <div class="v-desc">연핑크 카드 배경 + 안내 힌트 + 생리↔체중 간격</div>
+    </div>
+    <div class="v-badge">최신</div>
+  </a>
+  <a class="version-item" href="v9.html">
     <div class="v-num">v9</div>
     <div class="v-info">
       <div class="v-title">초심플 홈 + 배너 광고 + MY탭</div>
       <div class="v-desc">체중 큰 숫자, 자동저장, 4탭, AdMob 배너, 설정화면</div>
     </div>
-    <div class="v-badge">최신</div>
   </a>
 </div>
 
