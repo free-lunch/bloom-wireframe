@@ -15,154 +15,206 @@
     min-height: 100vh;
   }
 
-  /* Navigation */
-  .nav {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 16px;
-    background: #fff;
-    border-bottom: 1px solid #eee;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    flex-wrap: wrap;
-  }
-  .nav button {
-    padding: 8px 16px;
-    border: 2px solid #e8b4c8;
-    background: #fff;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #c77d9a;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .nav button.active {
-    background: #e8b4c8;
-    color: #fff;
+  /* Page info banner */
+  .page-info {
+    background: #fff3cd;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 11px;
+    color: #856404;
   }
 
   /* Screen container */
-  .screen { display: none; min-height: calc(100vh - 60px); background: #fff; }
+  .screen { display: none; min-height: calc(100vh - 100px); background: #fff; padding-bottom: 80px; }
   .screen.active { display: block; }
 
-  /* Status bar mock */
-  .status-bar {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 20px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #333;
-  }
-
-  /* Home Screen */
+  /* ===== HOME SCREEN ===== */
   .home-header {
     text-align: center;
     padding: 20px 20px 0;
   }
-  .home-header h1 {
-    font-size: 24px;
-    color: #c77d9a;
-  }
-  .home-header p {
-    font-size: 13px;
-    color: #999;
-    margin-top: 4px;
-  }
+  .home-header h1 { font-size: 24px; color: #c77d9a; }
+  .home-header p { font-size: 13px; color: #999; margin-top: 4px; }
 
   .cycle-ring {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     border: 8px solid #f0d4e0;
-    margin: 24px auto;
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
     background: linear-gradient(135deg, #fdf2f6 0%, #fff 100%);
   }
-  .cycle-ring .day-count {
-    font-size: 48px;
-    font-weight: 700;
-    color: #c77d9a;
-  }
-  .cycle-ring .day-label {
-    font-size: 14px;
-    color: #999;
-    margin-top: 4px;
-  }
-  .cycle-ring .phase {
-    font-size: 13px;
-    color: #e8b4c8;
-    font-weight: 600;
-    margin-top: 8px;
-  }
+  .cycle-ring .day-count { font-size: 44px; font-weight: 700; color: #c77d9a; }
+  .cycle-ring .day-label { font-size: 13px; color: #999; margin-top: 2px; }
+  .cycle-ring .phase { font-size: 13px; color: #e8b4c8; font-weight: 600; margin-top: 6px; }
 
   .quick-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 16px 20px;
   }
   .stat-card {
     background: #fdf8fa;
-    border-radius: 16px;
-    padding: 16px;
+    border-radius: 14px;
+    padding: 12px 8px;
     text-align: center;
   }
-  .stat-card .icon { font-size: 24px; }
-  .stat-card .value {
-    font-size: 20px;
-    font-weight: 700;
-    color: #333;
-    margin: 4px 0;
+  .stat-card .icon { font-size: 20px; }
+  .stat-card .value { font-size: 16px; font-weight: 700; color: #333; margin: 2px 0; }
+  .stat-card .label { font-size: 11px; color: #999; }
+
+  /* Record section on home */
+  .home-record {
+    margin: 0 20px;
+    padding: 20px;
+    background: #fdf8fa;
+    border-radius: 16px;
   }
-  .stat-card .label {
-    font-size: 12px;
-    color: #999;
+  .home-record h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 16px;
+    text-align: center;
   }
 
-  .record-btn {
+  .record-section { margin-bottom: 20px; }
+  .record-section:last-child { margin-bottom: 0; }
+  .record-section h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  /* Weight input inline */
+  .weight-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .weight-inline input {
+    width: 90px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #e8b4c8;
+    background: transparent;
+    color: #333;
+    outline: none;
+    padding: 4px;
+  }
+  .weight-inline span { font-size: 16px; color: #999; }
+
+  /* Flow options */
+  .flow-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .flow-option {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 11px;
+    color: #666;
+  }
+  .flow-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #e8b4c8;
+    margin-bottom: 4px;
+  }
+  .flow-option:nth-child(2) .flow-dot { width: 14px; height: 14px; }
+  .flow-option:nth-child(3) .flow-dot { width: 18px; height: 18px; }
+  .flow-option:nth-child(4) { background: #f5f5f5; }
+  .flow-option:nth-child(4) .flow-dot { background: #ccc; }
+  .flow-option.selected { border-color: #c77d9a; background: #fdf2f6; }
+
+  /* Mood */
+  .mood-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 4px 0;
+  }
+  .mood-item {
+    text-align: center;
+    font-size: 26px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 0.2s;
+  }
+  .mood-item.selected { opacity: 1; transform: scale(1.2); }
+  .mood-item .mood-label { font-size: 10px; color: #999; margin-top: 2px; }
+
+  /* Symptom tags */
+  .symptom-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .symptom-tag {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    background: #fff;
+    color: #666;
+    border: 1px solid #eee;
+    cursor: pointer;
+  }
+  .symptom-tag.selected { background: #fdf2f6; color: #c77d9a; border-color: #e8b4c8; }
+
+  /* Memo */
+  .memo-input {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    resize: none;
+    font-family: inherit;
+    background: #fff;
+  }
+
+  /* Save button */
+  .save-btn {
     display: block;
-    margin: 0 20px 20px;
-    padding: 16px;
+    margin: 16px 20px 20px;
+    padding: 14px;
     background: linear-gradient(135deg, #e8b4c8, #c77d9a);
     color: #fff;
     border: none;
-    border-radius: 16px;
-    font-size: 16px;
+    border-radius: 14px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     text-align: center;
+    width: calc(100% - 40px);
   }
 
-  /* Calendar Screen */
+  /* ===== CALENDAR SCREEN ===== */
   .calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px 20px;
   }
-  .calendar-header h2 {
-    font-size: 18px;
-    color: #333;
-  }
+  .calendar-header h2 { font-size: 18px; color: #333; }
   .calendar-header button {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #c77d9a;
+    background: none; border: none; font-size: 20px; cursor: pointer; color: #c77d9a;
   }
 
-  .calendar-grid {
-    padding: 0 12px;
-  }
+  .calendar-grid { padding: 0 12px; }
   .calendar-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -178,271 +230,167 @@
     text-align: center;
   }
   .calendar-day {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
     margin: 0 auto;
     border-radius: 50%;
-    font-size: 14px;
+    font-size: 13px;
     color: #333;
-    position: relative;
+    cursor: pointer;
   }
-  .calendar-day.period {
-    background: #f8d7e6;
-    color: #c77d9a;
-    font-weight: 600;
+  .calendar-day.period { background: #f8d7e6; color: #c77d9a; font-weight: 600; }
+  .calendar-day.predicted { border: 2px dashed #e8b4c8; color: #c77d9a; }
+  .calendar-day.ovulation { background: #d4f0e8; color: #5fa88a; font-weight: 600; }
+  .calendar-day.today { border: 2px solid #c77d9a; font-weight: 700; }
+  .calendar-day.has-record { position: relative; }
+  .calendar-day.has-record::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #c77d9a;
   }
-  .calendar-day.predicted {
-    border: 2px dashed #e8b4c8;
-    color: #c77d9a;
-  }
-  .calendar-day.ovulation {
-    background: #d4f0e8;
-    color: #5fa88a;
-    font-weight: 600;
-  }
-  .calendar-day.today {
-    border: 2px solid #c77d9a;
-    font-weight: 700;
-  }
-  .calendar-day.empty { color: transparent; }
 
   .calendar-legend {
     display: flex;
     justify-content: center;
-    gap: 16px;
-    padding: 16px;
-    font-size: 12px;
+    gap: 14px;
+    padding: 12px;
+    font-size: 11px;
     color: #666;
   }
   .legend-dot {
-    width: 10px;
-    height: 10px;
+    width: 10px; height: 10px;
     border-radius: 50%;
     display: inline-block;
-    margin-right: 4px;
+    margin-right: 3px;
     vertical-align: middle;
   }
 
-  /* Weight Screen */
-  .weight-header {
-    padding: 20px;
-    text-align: center;
+  /* Day detail card */
+  .day-detail {
+    margin: 0 20px 20px;
+    background: #fdf8fa;
+    border-radius: 14px;
+    padding: 16px;
   }
-  .weight-header h2 { font-size: 18px; color: #333; }
+  .day-detail h3 { font-size: 15px; color: #333; margin-bottom: 10px; }
+  .day-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    color: #666;
+    border-bottom: 1px solid #f0e8ec;
+  }
+  .day-detail-row:last-child { border-bottom: none; }
+  .day-detail-row .val { font-weight: 600; color: #333; }
 
-  .weight-current {
-    text-align: center;
+  /* ===== STATS SCREEN ===== */
+  .stats-header {
     padding: 20px;
+    text-align: center;
   }
-  .weight-current .big-number {
-    font-size: 56px;
-    font-weight: 700;
-    color: #c77d9a;
+  .stats-header h2 { font-size: 18px; color: #333; }
+
+  .stats-toggle {
+    display: flex;
+    margin: 0 20px 16px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    overflow: hidden;
   }
-  .weight-current .unit {
-    font-size: 18px;
+  .stats-toggle button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
     color: #999;
-    font-weight: 400;
+    cursor: pointer;
   }
-  .weight-current .change {
-    font-size: 14px;
-    color: #5fa88a;
-    margin-top: 4px;
+  .stats-toggle button.active {
+    background: #fff;
+    color: #c77d9a;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   }
 
-  .weight-chart {
-    margin: 0 20px;
-    height: 180px;
+  /* Weight chart */
+  .stats-chart {
+    margin: 0 20px 16px;
+    height: 200px;
     background: #fdf8fa;
     border-radius: 16px;
     position: relative;
     overflow: hidden;
     padding: 16px;
   }
-  .chart-line {
-    position: absolute;
-    bottom: 40px;
-    left: 16px;
-    right: 16px;
-    height: 100px;
+  .stats-chart h4 {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .chart-area {
+    position: relative;
+    height: 120px;
   }
   .chart-svg { width: 100%; height: 100%; }
   .chart-labels {
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    bottom: 12px;
-    left: 16px;
-    right: 16px;
-    font-size: 11px;
+    font-size: 10px;
     color: #999;
+    margin-top: 8px;
   }
 
-  .weight-input {
-    margin: 20px;
-    padding: 20px;
-    background: #fdf8fa;
-    border-radius: 16px;
-    text-align: center;
-  }
-  .weight-input input {
-    width: 120px;
-    font-size: 32px;
-    font-weight: 700;
-    text-align: center;
-    border: none;
-    border-bottom: 3px solid #e8b4c8;
-    background: transparent;
-    color: #333;
-    outline: none;
-    padding: 8px;
-  }
-  .weight-input .save-btn {
-    display: block;
-    width: 100%;
-    margin-top: 16px;
-    padding: 14px;
-    background: linear-gradient(135deg, #e8b4c8, #c77d9a);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .weight-stats {
+  /* Stats cards */
+  .stats-cards {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
-    padding: 0 20px 20px;
-  }
-  .weight-stat {
-    text-align: center;
-    background: #fdf8fa;
-    border-radius: 12px;
-    padding: 12px 8px;
-  }
-  .weight-stat .val {
-    font-size: 18px;
-    font-weight: 700;
-    color: #333;
-  }
-  .weight-stat .lbl {
-    font-size: 11px;
-    color: #999;
-    margin-top: 2px;
-  }
-
-  /* Record Screen */
-  .record-header {
-    padding: 20px;
-    text-align: center;
-  }
-  .record-header h2 { font-size: 18px; color: #333; }
-  .record-header p { font-size: 13px; color: #999; margin-top: 4px; }
-
-  .record-section {
     padding: 0 20px 16px;
   }
-  .record-section h3 {
-    font-size: 14px;
-    font-weight: 600;
-    color: #666;
-    margin-bottom: 12px;
-  }
-
-  .symptom-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .symptom-tag {
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    background: #f5f5f5;
-    color: #666;
-    border: 1px solid #eee;
-    cursor: pointer;
-  }
-  .symptom-tag.selected {
-    background: #fdf2f6;
-    color: #c77d9a;
-    border-color: #e8b4c8;
-  }
-
-  .mood-row {
-    display: flex;
-    justify-content: space-around;
-    padding: 8px 0;
-  }
-  .mood-item {
-    text-align: center;
-    font-size: 28px;
-    cursor: pointer;
-    opacity: 0.4;
-    transition: all 0.2s;
-  }
-  .mood-item.selected { opacity: 1; transform: scale(1.2); }
-  .mood-item .mood-label {
-    font-size: 11px;
-    color: #999;
-    margin-top: 4px;
-  }
-
-  .flow-row {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-  }
-  .flow-option {
-    width: 60px;
-    height: 60px;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #f5f5f5;
-    border: 2px solid transparent;
-    cursor: pointer;
-    font-size: 11px;
-    color: #666;
-  }
-  .flow-option .flow-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #e8b4c8;
-    margin-bottom: 4px;
-  }
-  .flow-option:nth-child(2) .flow-dot { width: 16px; height: 16px; }
-  .flow-option:nth-child(3) .flow-dot { width: 20px; height: 20px; }
-  .flow-option.selected {
-    border-color: #c77d9a;
-    background: #fdf2f6;
-  }
-
-  .save-record-btn {
-    display: block;
-    margin: 20px;
+  .stats-card {
+    background: #fdf8fa;
+    border-radius: 14px;
     padding: 16px;
-    background: linear-gradient(135deg, #e8b4c8, #c77d9a);
-    color: #fff;
-    border: none;
-    border-radius: 16px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    width: calc(100% - 40px);
     text-align: center;
   }
+  .stats-card .sc-icon { font-size: 24px; margin-bottom: 4px; }
+  .stats-card .sc-value { font-size: 22px; font-weight: 700; color: #333; }
+  .stats-card .sc-label { font-size: 11px; color: #999; margin-top: 2px; }
+  .stats-card .sc-sub { font-size: 11px; color: #5fa88a; margin-top: 2px; }
 
-  /* Bottom Tab Bar */
+  /* Cycle stats */
+  .cycle-stats {
+    margin: 0 20px 20px;
+    background: #fdf8fa;
+    border-radius: 16px;
+    padding: 16px;
+  }
+  .cycle-stats h4 { font-size: 13px; color: #666; margin-bottom: 12px; }
+  .cycle-bar {
+    display: flex;
+    height: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .cycle-bar .phase-period { background: #f8d7e6; flex: 5; }
+  .cycle-bar .phase-follicular { background: #fef3c7; flex: 8; }
+  .cycle-bar .phase-ovulation { background: #d4f0e8; flex: 2; }
+  .cycle-bar .phase-luteal { background: #e8d4f0; flex: 13; }
+  .cycle-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #999;
+  }
+
+  /* ===== BOTTOM TAB BAR ===== */
   .tab-bar {
     position: fixed;
     bottom: 0;
@@ -464,42 +412,17 @@
     padding: 4px;
   }
   .tab-item .tab-icon { font-size: 22px; }
-  .tab-item .tab-label {
-    font-size: 10px;
-    color: #999;
-    margin-top: 2px;
-  }
+  .tab-item .tab-label { font-size: 10px; color: #999; margin-top: 2px; }
   .tab-item.active .tab-label { color: #c77d9a; font-weight: 600; }
-
-  /* Page info banner */
-  .page-info {
-    background: #fff3cd;
-    padding: 12px 16px;
-    text-align: center;
-    font-size: 12px;
-    color: #856404;
-  }
-
-  /* Spacing for bottom tab */
-  .screen { padding-bottom: 80px; }
 </style>
 </head>
 <body>
 
-<!-- Page Info -->
 <div class="page-info">
-  🌸 Bloom Wireframe v0.1 — 와이어프레임 프로토타입 (터치해서 탐색하세요!)
+  🌸 Bloom Wireframe v0.2 — 3탭 구조 (홈+기록 통합)
 </div>
 
-<!-- Top Navigation -->
-<div class="nav">
-  <button class="active" onclick="showScreen('home')">🏠 홈</button>
-  <button onclick="showScreen('calendar')">📅 캘린더</button>
-  <button onclick="showScreen('record')">📝 기록</button>
-  <button onclick="showScreen('weight')">⚖️ 체중</button>
-</div>
-
-<!-- HOME SCREEN -->
+<!-- ==================== HOME SCREEN ==================== -->
 <div id="home" class="screen active">
   <div class="home-header">
     <h1>Bloom 🌸</h1>
@@ -519,14 +442,9 @@
       <div class="label">오늘 체중</div>
     </div>
     <div class="stat-card">
-      <div class="icon">📉</div>
-      <div class="value">-0.3kg</div>
-      <div class="label">이번 주 변화</div>
-    </div>
-    <div class="stat-card">
       <div class="icon">🩸</div>
       <div class="value">5일 후</div>
-      <div class="label">다음 생리 예정</div>
+      <div class="label">다음 생리</div>
     </div>
     <div class="stat-card">
       <div class="icon">🔄</div>
@@ -535,10 +453,75 @@
     </div>
   </div>
 
-  <button class="record-btn" onclick="showScreen('record')">✏️ 오늘 기록하기</button>
+  <!-- 통합 기록 섹션 -->
+  <div class="home-record">
+    <h3>✏️ 오늘의 기록</h3>
+
+    <div class="record-section">
+      <h4>⚖️ 체중</h4>
+      <div class="weight-inline">
+        <input type="number" value="58.2" step="0.1">
+        <span>kg</span>
+      </div>
+    </div>
+
+    <div class="record-section">
+      <h4>🩸 생리</h4>
+      <div class="flow-row">
+        <div class="flow-option" onclick="selectFlow(this)">
+          <div class="flow-dot"></div>
+          <span>적음</span>
+        </div>
+        <div class="flow-option" onclick="selectFlow(this)">
+          <div class="flow-dot"></div>
+          <span>보통</span>
+        </div>
+        <div class="flow-option" onclick="selectFlow(this)">
+          <div class="flow-dot"></div>
+          <span>많음</span>
+        </div>
+        <div class="flow-option selected" onclick="selectFlow(this)">
+          <div class="flow-dot"></div>
+          <span>없음</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="record-section">
+      <h4>😊 기분</h4>
+      <div class="mood-row">
+        <div class="mood-item" onclick="selectMood(this)">😢<div class="mood-label">슬픔</div></div>
+        <div class="mood-item" onclick="selectMood(this)">😐<div class="mood-label">보통</div></div>
+        <div class="mood-item selected" onclick="selectMood(this)">😊<div class="mood-label">좋음</div></div>
+        <div class="mood-item" onclick="selectMood(this)">😍<div class="mood-label">최고</div></div>
+        <div class="mood-item" onclick="selectMood(this)">😡<div class="mood-label">짜증</div></div>
+      </div>
+    </div>
+
+    <div class="record-section">
+      <h4>🤕 증상</h4>
+      <div class="symptom-tags">
+        <span class="symptom-tag" onclick="this.classList.toggle('selected')">복통</span>
+        <span class="symptom-tag" onclick="this.classList.toggle('selected')">두통</span>
+        <span class="symptom-tag selected" onclick="this.classList.toggle('selected')">피로</span>
+        <span class="symptom-tag" onclick="this.classList.toggle('selected')">부종</span>
+        <span class="symptom-tag" onclick="this.classList.toggle('selected')">요통</span>
+        <span class="symptom-tag" onclick="this.classList.toggle('selected')">유방통</span>
+        <span class="symptom-tag" onclick="this.classList.toggle('selected')">불면</span>
+        <span class="symptom-tag" onclick="this.classList.toggle('selected')">식욕변화</span>
+      </div>
+    </div>
+
+    <div class="record-section">
+      <h4>📝 메모</h4>
+      <textarea class="memo-input" placeholder="오늘 특이사항이 있다면..."></textarea>
+    </div>
+  </div>
+
+  <button class="save-btn">저장하기 ✓</button>
 </div>
 
-<!-- CALENDAR SCREEN -->
+<!-- ==================== CALENDAR SCREEN ==================== -->
 <div id="calendar" class="screen">
   <div class="calendar-header">
     <button>‹</button>
@@ -552,11 +535,11 @@
     </div>
     <div class="calendar-days">
       <div class="calendar-day">1</div>
-      <div class="calendar-day">2</div>
-      <div class="calendar-day">3</div>
-      <div class="calendar-day">4</div>
-      <div class="calendar-day">5</div>
-      <div class="calendar-day today">6</div>
+      <div class="calendar-day has-record">2</div>
+      <div class="calendar-day has-record">3</div>
+      <div class="calendar-day has-record">4</div>
+      <div class="calendar-day has-record">5</div>
+      <div class="calendar-day today has-record">6</div>
       <div class="calendar-day">7</div>
       <div class="calendar-day">8</div>
       <div class="calendar-day">9</div>
@@ -587,152 +570,162 @@
 
   <div class="calendar-legend">
     <span><span class="legend-dot" style="background:#f8d7e6"></span> 생리</span>
-    <span><span class="legend-dot" style="background:#fff;border:2px dashed #e8b4c8"></span> 예정</span>
+    <span><span class="legend-dot" style="background:#fff;border:2px dashed #e8b4c8;width:8px;height:8px"></span> 예정</span>
     <span><span class="legend-dot" style="background:#d4f0e8"></span> 배란</span>
+    <span><span class="legend-dot" style="background:#c77d9a;width:6px;height:6px"></span> 기록</span>
   </div>
 
-  <div style="padding:16px 20px;">
-    <h3 style="font-size:15px;color:#333;margin-bottom:12px;">3월 6일 (오늘)</h3>
-    <div style="background:#fdf8fa;border-radius:12px;padding:16px;">
-      <p style="font-size:13px;color:#666;">🌱 배란기 · 주기 14일째</p>
-      <p style="font-size:13px;color:#666;margin-top:8px;">⚖️ 체중: 58.2kg</p>
-      <p style="font-size:13px;color:#666;margin-top:8px;">😊 기분: 좋음</p>
+  <!-- 선택한 날짜 상세 -->
+  <div class="day-detail">
+    <h3>📋 3월 6일 (오늘)</h3>
+    <div class="day-detail-row">
+      <span>🌱 주기</span>
+      <span class="val">배란기 · 14일째</span>
+    </div>
+    <div class="day-detail-row">
+      <span>⚖️ 체중</span>
+      <span class="val">58.2 kg</span>
+    </div>
+    <div class="day-detail-row">
+      <span>🩸 생리</span>
+      <span class="val">없음</span>
+    </div>
+    <div class="day-detail-row">
+      <span>😊 기분</span>
+      <span class="val">좋음</span>
+    </div>
+    <div class="day-detail-row">
+      <span>🤕 증상</span>
+      <span class="val">피로</span>
     </div>
   </div>
 </div>
 
-<!-- WEIGHT SCREEN -->
-<div id="weight" class="screen">
-  <div class="weight-header">
-    <h2>⚖️ 체중 관리</h2>
+<!-- ==================== STATS SCREEN ==================== -->
+<div id="stats" class="screen">
+  <div class="stats-header">
+    <h2>📊 통계</h2>
   </div>
 
-  <div class="weight-current">
-    <div class="big-number">58.2<span class="unit">kg</span></div>
-    <div class="change">▼ 0.3kg 이번 주</div>
+  <div class="stats-toggle">
+    <button class="active" onclick="toggleStats(this, 'weight-stats')">체중</button>
+    <button onclick="toggleStats(this, 'cycle-stats-view')">주기</button>
   </div>
 
-  <div class="weight-chart">
-    <div class="chart-line">
-      <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#e8b4c8;stop-opacity:0.3"/>
-            <stop offset="100%" style="stop-color:#e8b4c8;stop-opacity:0"/>
-          </linearGradient>
-        </defs>
-        <path d="M0,60 L43,55 L86,65 L129,50 L172,45 L215,40 L258,35 L300,30" 
-              fill="none" stroke="#c77d9a" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M0,60 L43,55 L86,65 L129,50 L172,45 L215,40 L258,35 L300,30 L300,100 L0,100Z" 
-              fill="url(#grad)"/>
-        <!-- dots -->
-        <circle cx="0" cy="60" r="4" fill="#c77d9a"/>
-        <circle cx="43" cy="55" r="4" fill="#c77d9a"/>
-        <circle cx="86" cy="65" r="4" fill="#c77d9a"/>
-        <circle cx="129" cy="50" r="4" fill="#c77d9a"/>
-        <circle cx="172" cy="45" r="4" fill="#c77d9a"/>
-        <circle cx="215" cy="40" r="4" fill="#c77d9a"/>
-        <circle cx="258" cy="35" r="4" fill="#c77d9a"/>
-        <circle cx="300" cy="30" r="5" fill="#c77d9a" stroke="#fff" stroke-width="2"/>
-      </svg>
+  <!-- 체중 통계 -->
+  <div id="weight-stats">
+    <div class="stats-chart">
+      <h4>최근 30일 체중 변화</h4>
+      <div class="chart-area">
+        <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#e8b4c8;stop-opacity:0.3"/>
+              <stop offset="100%" style="stop-color:#e8b4c8;stop-opacity:0"/>
+            </linearGradient>
+          </defs>
+          <!-- Goal line -->
+          <line x1="0" y1="85" x2="300" y2="85" stroke="#5fa88a" stroke-width="1" stroke-dasharray="4"/>
+          <text x="305" y="88" font-size="8" fill="#5fa88a"></text>
+          <!-- Weight line -->
+          <path d="M0,20 L30,25 L60,22 L90,30 L120,28 L150,35 L180,32 L210,40 L240,38 L270,42 L300,45"
+                fill="none" stroke="#c77d9a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M0,20 L30,25 L60,22 L90,30 L120,28 L150,35 L180,32 L210,40 L240,38 L270,42 L300,45 L300,100 L0,100Z"
+                fill="url(#grad)"/>
+          <circle cx="300" cy="45" r="4" fill="#c77d9a" stroke="#fff" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="chart-labels">
+        <span>2/5</span><span>2/12</span><span>2/19</span><span>2/26</span><span>3/6</span>
+      </div>
     </div>
-    <div class="chart-labels">
-      <span>2/28</span><span>3/1</span><span>3/2</span><span>3/3</span><span>3/4</span><span>3/5</span><span>3/6</span><span>오늘</span>
+
+    <div class="stats-cards">
+      <div class="stats-card">
+        <div class="sc-icon">⚖️</div>
+        <div class="sc-value">58.2</div>
+        <div class="sc-label">현재 체중 (kg)</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">🎯</div>
+        <div class="sc-value">55.0</div>
+        <div class="sc-label">목표 체중 (kg)</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">📉</div>
+        <div class="sc-value">-0.9</div>
+        <div class="sc-label">총 변화</div>
+        <div class="sc-sub">시작: 59.1kg</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">📅</div>
+        <div class="sc-value">-0.3</div>
+        <div class="sc-label">이번 주</div>
+        <div class="sc-sub">▼ 감소 중</div>
+      </div>
     </div>
   </div>
 
-  <div class="weight-input">
-    <p style="font-size:13px;color:#999;margin-bottom:8px;">오늘의 체중</p>
-    <input type="number" value="58.2" step="0.1">
-    <span style="font-size:18px;color:#999;">kg</span>
-    <button class="save-btn">저장하기 ✓</button>
-  </div>
+  <!-- 주기 통계 -->
+  <div id="cycle-stats-view" style="display:none;">
+    <div class="cycle-stats">
+      <h4>주기 패턴</h4>
+      <div class="cycle-bar">
+        <div class="phase-period"></div>
+        <div class="phase-follicular"></div>
+        <div class="phase-ovulation"></div>
+        <div class="phase-luteal"></div>
+      </div>
+      <div class="cycle-labels">
+        <span>생리(5일)</span>
+        <span>여포기(8일)</span>
+        <span>배란(2일)</span>
+        <span>황체기(13일)</span>
+      </div>
+    </div>
 
-  <div class="weight-stats">
-    <div class="weight-stat">
-      <div class="val">59.1</div>
-      <div class="lbl">시작 체중</div>
+    <div class="stats-cards">
+      <div class="stats-card">
+        <div class="sc-icon">🔄</div>
+        <div class="sc-value">28</div>
+        <div class="sc-label">평균 주기 (일)</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">🩸</div>
+        <div class="sc-value">5</div>
+        <div class="sc-label">평균 생리 기간</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">📊</div>
+        <div class="sc-value">3</div>
+        <div class="sc-label">최근 주기 수</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">✅</div>
+        <div class="sc-value">92%</div>
+        <div class="sc-label">주기 규칙성</div>
+      </div>
     </div>
-    <div class="weight-stat">
-      <div class="val">55.0</div>
-      <div class="lbl">목표 체중</div>
-    </div>
-    <div class="weight-stat">
-      <div class="val">-0.9</div>
-      <div class="lbl">총 변화</div>
+
+    <div class="cycle-stats">
+      <h4>최근 3개월 주기</h4>
+      <div class="day-detail-row" style="border-bottom:1px solid #f0e8ec;">
+        <span>1월</span>
+        <span class="val">27일 (1/3 ~ 1/7)</span>
+      </div>
+      <div class="day-detail-row" style="border-bottom:1px solid #f0e8ec;">
+        <span>2월</span>
+        <span class="val">29일 (1/30 ~ 2/4)</span>
+      </div>
+      <div class="day-detail-row">
+        <span>3월</span>
+        <span class="val">예정 (2/28 ~)</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- RECORD SCREEN -->
-<div id="record" class="screen">
-  <div class="record-header">
-    <h2>📝 오늘의 기록</h2>
-    <p>3월 6일 금요일</p>
-  </div>
-
-  <div class="record-section">
-    <h3>🩸 생리량</h3>
-    <div class="flow-row">
-      <div class="flow-option" onclick="selectFlow(this)">
-        <div class="flow-dot"></div>
-        <span>적음</span>
-      </div>
-      <div class="flow-option selected" onclick="selectFlow(this)">
-        <div class="flow-dot"></div>
-        <span>보통</span>
-      </div>
-      <div class="flow-option" onclick="selectFlow(this)">
-        <div class="flow-dot"></div>
-        <span>많음</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="record-section">
-    <h3>😊 오늘 기분</h3>
-    <div class="mood-row">
-      <div class="mood-item" onclick="selectMood(this)">
-        😢<div class="mood-label">슬픔</div>
-      </div>
-      <div class="mood-item" onclick="selectMood(this)">
-        😐<div class="mood-label">보통</div>
-      </div>
-      <div class="mood-item selected" onclick="selectMood(this)">
-        😊<div class="mood-label">좋음</div>
-      </div>
-      <div class="mood-item" onclick="selectMood(this)">
-        😍<div class="mood-label">최고</div>
-      </div>
-      <div class="mood-item" onclick="selectMood(this)">
-        😡<div class="mood-label">짜증</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="record-section">
-    <h3>🤕 증상</h3>
-    <div class="symptom-tags">
-      <span class="symptom-tag selected">복통</span>
-      <span class="symptom-tag">두통</span>
-      <span class="symptom-tag selected">피로</span>
-      <span class="symptom-tag">부종</span>
-      <span class="symptom-tag">요통</span>
-      <span class="symptom-tag">유방통</span>
-      <span class="symptom-tag">불면</span>
-      <span class="symptom-tag">식욕변화</span>
-    </div>
-  </div>
-
-  <div class="record-section">
-    <h3>📝 메모</h3>
-    <textarea style="width:100%;height:80px;border:1px solid #eee;border-radius:12px;padding:12px;font-size:14px;resize:none;font-family:inherit;" placeholder="오늘 특이사항이 있다면 기록해주세요..."></textarea>
-  </div>
-
-  <button class="save-record-btn">저장하기 ✓</button>
-</div>
-
-<!-- Bottom Tab Bar -->
+<!-- ===== BOTTOM TAB BAR ===== -->
 <div class="tab-bar">
   <div class="tab-item active" onclick="showScreen('home')">
     <div class="tab-icon">🏠</div>
@@ -742,32 +735,22 @@
     <div class="tab-icon">📅</div>
     <div class="tab-label">캘린더</div>
   </div>
-  <div class="tab-item" onclick="showScreen('record')">
-    <div class="tab-icon">📝</div>
-    <div class="tab-label">기록</div>
-  </div>
-  <div class="tab-item" onclick="showScreen('weight')">
-    <div class="tab-icon">⚖️</div>
-    <div class="tab-label">체중</div>
+  <div class="tab-item" onclick="showScreen('stats')">
+    <div class="tab-icon">📊</div>
+    <div class="tab-label">통계</div>
   </div>
 </div>
 
 <script>
+const screens = ['home', 'calendar', 'stats'];
+
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  
-  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-  
-  const navBtns = document.querySelectorAll('.nav button');
-  const tabItems = document.querySelectorAll('.tab-item');
-  const screens = ['home', 'calendar', 'record', 'weight'];
   const idx = screens.indexOf(id);
-  if (idx >= 0) {
-    navBtns[idx].classList.add('active');
-    tabItems[idx].classList.add('active');
-  }
+  if (idx >= 0) document.querySelectorAll('.tab-item')[idx].classList.add('active');
+  window.scrollTo(0, 0);
 }
 
 function selectMood(el) {
@@ -780,9 +763,12 @@ function selectFlow(el) {
   el.classList.add('selected');
 }
 
-document.querySelectorAll('.symptom-tag').forEach(tag => {
-  tag.addEventListener('click', () => tag.classList.toggle('selected'));
-});
+function toggleStats(btn, showId) {
+  document.querySelectorAll('.stats-toggle button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('weight-stats').style.display = showId === 'weight-stats' ? 'block' : 'none';
+  document.getElementById('cycle-stats-view').style.display = showId === 'cycle-stats-view' ? 'block' : 'none';
+}
 </script>
 
 </body>
