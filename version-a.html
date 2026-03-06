@@ -422,6 +422,34 @@
     color: #999;
   }
 
+  /* Weight log list */
+  .weight-log-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .weight-log-item:last-child { border-bottom: none; }
+  .wl-date { width: 60px; }
+  .wl-day { font-size: 14px; font-weight: 600; color: #333; }
+  .wl-weekday { font-size: 11px; color: #bbb; }
+  .wl-weight {
+    flex: 1;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+  }
+  .wl-unit { font-size: 13px; color: #999; font-weight: 400; }
+  .wl-change {
+    width: 50px;
+    text-align: right;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .wl-change.down { color: #4cafe0; }
+  .wl-change.up { color: #e8837c; }
+
   /* Y-axis labels */
   .y-axis {
     display: flex;
@@ -950,6 +978,57 @@
         <div class="sc-sub">▼ 감소 중</div>
       </div>
     </div>
+
+    <!-- 체중 기록 목록 -->
+    <div style="padding:0 20px 20px;">
+      <h4 style="font-size:14px;color:#333;margin-bottom:10px;">📋 기록 목록</h4>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/6</div>
+          <div class="wl-weekday">목요일</div>
+        </div>
+        <div class="wl-weight">58.2<span class="wl-unit">kg</span></div>
+        <div class="wl-change down">-0.3</div>
+      </div>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/5</div>
+          <div class="wl-weekday">수요일</div>
+        </div>
+        <div class="wl-weight">58.5<span class="wl-unit">kg</span></div>
+        <div class="wl-change down">-0.1</div>
+      </div>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/4</div>
+          <div class="wl-weekday">화요일</div>
+        </div>
+        <div class="wl-weight">58.6<span class="wl-unit">kg</span></div>
+        <div class="wl-change up">+0.2</div>
+      </div>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/3</div>
+          <div class="wl-weekday">월요일</div>
+        </div>
+        <div class="wl-weight">58.4<span class="wl-unit">kg</span></div>
+        <div class="wl-change down">-0.5</div>
+      </div>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/2</div>
+          <div class="wl-weekday">일요일</div>
+        </div>
+        <div class="wl-weight">58.9<span class="wl-unit">kg</span></div>
+        <div class="wl-change up">+0.1</div>
+      </div>
+    </div>
+
   </div><!-- end weight-view -->
 
 </div>
