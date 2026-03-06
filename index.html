@@ -202,6 +202,36 @@
     width: calc(100% - 40px);
   }
 
+  /* Period toggle button */
+  .period-toggle {
+    margin: 0 auto 8px;
+    width: fit-content;
+    cursor: pointer;
+  }
+  .period-toggle-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    border-radius: 30px;
+    background: #fff;
+    border: 2px solid #e8b4c8;
+    transition: all 0.3s;
+  }
+  .period-toggle-inner.active {
+    background: linear-gradient(135deg, #f8d7e6, #e8b4c8);
+    border-color: #c77d9a;
+  }
+  .period-icon { font-size: 20px; }
+  .period-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #c77d9a;
+  }
+  .period-toggle-inner.active .period-text {
+    color: #fff;
+  }
+
   /* ===== CALENDAR SCREEN ===== */
   .calendar-header {
     display: flex;
@@ -419,7 +449,7 @@
 <body>
 
 <div class="page-info">
-  🌸 Bloom Wireframe v0.2 — 3탭 구조 (홈+기록 통합)
+  🌸 Bloom Wireframe v0.3 — 생리 시작 버튼 추가
 </div>
 
 <!-- ==================== HOME SCREEN ==================== -->
@@ -433,6 +463,14 @@
     <div class="day-count">14</div>
     <div class="day-label">일째</div>
     <div class="phase">🌱 배란기</div>
+  </div>
+
+  <!-- 생리 시작/끝 버튼 -->
+  <div class="period-toggle" onclick="togglePeriod()">
+    <div class="period-toggle-inner" id="periodBtn">
+      <span class="period-icon">🩸</span>
+      <span class="period-text">생리 시작</span>
+    </div>
   </div>
 
   <div class="quick-stats">
@@ -751,6 +789,18 @@ function showScreen(id) {
   const idx = screens.indexOf(id);
   if (idx >= 0) document.querySelectorAll('.tab-item')[idx].classList.add('active');
   window.scrollTo(0, 0);
+}
+
+function togglePeriod() {
+  const btn = document.getElementById('periodBtn');
+  const text = btn.querySelector('.period-text');
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    text.textContent = '생리 시작';
+  } else {
+    btn.classList.add('active');
+    text.textContent = '생리 중 · 탭하여 종료';
+  }
 }
 
 function selectMood(el) {
