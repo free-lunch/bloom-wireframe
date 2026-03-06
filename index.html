@@ -495,8 +495,8 @@
 <div class="nav">
   <button class="active" onclick="showScreen('home')">🏠 홈</button>
   <button onclick="showScreen('calendar')">📅 캘린더</button>
-  <button onclick="showScreen('weight')">⚖️ 체중</button>
   <button onclick="showScreen('record')">📝 기록</button>
+  <button onclick="showScreen('weight')">⚖️ 체중</button>
 </div>
 
 <!-- HOME SCREEN -->
@@ -742,13 +742,13 @@
     <div class="tab-icon">📅</div>
     <div class="tab-label">캘린더</div>
   </div>
-  <div class="tab-item" onclick="showScreen('weight')">
-    <div class="tab-icon">⚖️</div>
-    <div class="tab-label">체중</div>
-  </div>
   <div class="tab-item" onclick="showScreen('record')">
     <div class="tab-icon">📝</div>
     <div class="tab-label">기록</div>
+  </div>
+  <div class="tab-item" onclick="showScreen('weight')">
+    <div class="tab-icon">⚖️</div>
+    <div class="tab-label">체중</div>
   </div>
 </div>
 
@@ -762,7 +762,7 @@ function showScreen(id) {
   
   const navBtns = document.querySelectorAll('.nav button');
   const tabItems = document.querySelectorAll('.tab-item');
-  const screens = ['home', 'calendar', 'weight', 'record'];
+  const screens = ['home', 'calendar', 'record', 'weight'];
   const idx = screens.indexOf(id);
   if (idx >= 0) {
     navBtns[idx].classList.add('active');
