@@ -25,7 +25,7 @@
   }
 
   /* Screen container */
-  .screen { display: none; min-height: calc(100vh - 100px); background: #fff; padding-bottom: 80px; }
+  .screen { display: none; min-height: calc(100vh - 100px); background: #fff; padding-bottom: 130px; }
   .screen.active { display: block; }
 
   /* ===== HOME SCREEN ===== */
@@ -599,6 +599,21 @@
     color: #999;
   }
 
+  /* ===== AD BANNER ===== */
+  .ad-banner {
+    position: fixed;
+    bottom: 56px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: #f5f5f5;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 98;
+  }
+
   /* ===== BOTTOM TAB BAR ===== */
   .tab-bar {
     position: fixed;
@@ -1114,6 +1129,12 @@
     </div>
 
   </div>
+</div>
+
+<!-- ===== AD BANNER ===== -->
+<div class="ad-banner">
+  <span style="font-size:11px;color:#999;letter-spacing:1px;">AD</span>
+  <span style="font-size:12px;color:#bbb;margin-left:8px;">광고 영역 (AdMob 배너)</span>
 </div>
 
 <!-- ===== BOTTOM TAB BAR ===== -->
