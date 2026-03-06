@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bloom 🌸 Wireframe 비교</title>
+<title>Bloom 🌸 Wireframe 버전 히스토리</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -11,109 +11,62 @@
     background: #f5f5f5;
     color: #333;
     padding: 20px;
-    text-align: center;
-  }
-  h1 { font-size: 28px; color: #c77d9a; margin-bottom: 8px; }
-  .subtitle { font-size: 14px; color: #999; margin-bottom: 32px; }
-  .cards { 
-    display: flex; 
-    gap: 16px; 
-    justify-content: center; 
-    flex-wrap: wrap;
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
   }
-  .card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 28px 24px;
-    flex: 1;
-    min-width: 280px;
-    max-width: 380px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    text-align: left;
-  }
-  .card h2 { 
-    font-size: 20px; 
-    margin-bottom: 12px;
+  h1 { font-size: 24px; color: #c77d9a; text-align: center; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #999; text-align: center; margin-bottom: 24px; }
+  .version-list { display: flex; flex-direction: column; gap: 8px; }
+  .version-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-  }
-  .badge {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .badge-a { background: #e8f4fd; color: #2196F3; }
-  .badge-b { background: #fdf2f6; color: #c77d9a; }
-  .card p { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 16px; }
-  .card ul { font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 20px; padding-left: 20px; }
-  .card a {
-    display: block;
-    padding: 14px;
-    background: linear-gradient(135deg, #e8b4c8, #c77d9a);
-    color: #fff;
-    text-decoration: none;
+    background: #fff;
     border-radius: 14px;
-    font-size: 15px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: transform 0.1s;
+  }
+  .version-item:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .version-item.latest { border-left: 4px solid #c77d9a; }
+  .v-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: #c77d9a;
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .v-info { flex: 1; }
+  .v-title { font-size: 14px; font-weight: 600; }
+  .v-desc { font-size: 12px; color: #999; margin-top: 2px; }
+  .v-badge {
+    font-size: 10px;
+    background: #c77d9a;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 6px;
     font-weight: 600;
-    text-align: center;
-  }
-  .card:first-child a {
-    background: linear-gradient(135deg, #90caf9, #2196F3);
-  }
-  .diff {
-    background: #fffde7;
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 12px;
-    color: #856404;
-    margin-bottom: 16px;
-  }
-  .footer {
-    margin-top: 32px;
-    font-size: 12px;
-    color: #bbb;
   }
 </style>
 </head>
 <body>
 
 <h1>Bloom 🌸</h1>
-<p class="subtitle">홈 화면 기록 방식 A/B 비교 — 도뚜 골라줘!</p>
+<p class="subtitle">와이어프레임 버전 히스토리</p>
 
-<div class="cards">
-  <div class="card">
-    <h2><span class="badge badge-a">A</span> 퀵 입력</h2>
-    <p>체중 + 생리만 바로 보이고, 나머지는 "더 기록하기" 눌러서 펼침. 저장 버튼은 아래에 일반 배치.</p>
-    <ul>
-      <li>기본: 체중 + 생리량 2개만</li>
-      <li>"＋ 더 기록하기" → 기분/증상/메모 펼침</li>
-      <li>저장 버튼: 페이지 하단 (스크롤 필요할 수 있음)</li>
-      <li>✅ 매일 체중만 적을 때 빠름</li>
-    </ul>
-    <div class="diff">💡 80% 상황(체중만 기록)에 최적화</div>
-    <a href="version-a.html">🅰️ A안 보기 →</a>
-  </div>
-
-  <div class="card">
-    <h2><span class="badge badge-b">B</span> 퀵 입력 + 플로팅 저장</h2>
-    <p>A안과 동일하게 퀵 입력, 대신 저장 버튼이 화면 하단에 항상 떠있어서 스크롤 없이 바로 저장.</p>
-    <ul>
-      <li>기본: 체중 + 생리량 2개만</li>
-      <li>"＋ 더 기록하기" → 기분/증상/메모 펼침</li>
-      <li>저장 버튼: <strong>항상 하단에 고정</strong> (플로팅)</li>
-      <li>✅ 확장해도 저장 버튼 항상 보임</li>
-    </ul>
-    <div class="diff">💡 기분/증상까지 기록할 때도 편함</div>
-    <a href="version-b.html">🅱️ B안 보기 →</a>
-  </div>
+<div class="version-list">
+  <a class="version-item latest" href="v9.html">
+    <div class="v-num">v9</div>
+    <div class="v-info">
+      <div class="v-title">초심플 홈 + 배너 광고 + MY탭</div>
+      <div class="v-desc">체중 큰 숫자, 자동저장, 4탭, AdMob 배너, 설정화면</div>
+    </div>
+    <div class="v-badge">최신</div>
+  </a>
 </div>
 
-<p class="footer">🌸 Bloom Wireframe v0.7 · GitHub Pages · free-lunch/bloom-wireframe</p>
+<p style="text-align:center;margin-top:20px;font-size:11px;color:#ccc;">새 버전이 올라올 때마다 여기에 추가됩니다</p>
 
 </body>
 </html>
