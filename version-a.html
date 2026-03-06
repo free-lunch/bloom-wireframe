@@ -674,7 +674,8 @@
     </div>
   </div>
 
-  <button class="save-btn">저장하기 ✓</button>
+  <!-- 자동 저장 표시 -->
+  <div id="autoSaveMsg" style="text-align:center;padding:8px 0;font-size:12px;color:#bbb;opacity:0;transition:opacity 0.3s;">✓ 저장됨</div>
 </div>
 
 <!-- ==================== CALENDAR SCREEN ==================== -->
@@ -1174,6 +1175,23 @@ function togglePeriod() {
     text.textContent = '생리 중 · 탭하여 종료';
   }
 }
+
+// 자동 저장 (디바운스)
+let saveTimer;
+function autoSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    const msg = document.getElementById('autoSaveMsg');
+    msg.style.opacity = '1';
+    setTimeout(() => { msg.style.opacity = '0'; }, 1500);
+  }, 1000);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const weightInput = document.querySelector('.weight-inline input');
+  const memoInput = document.querySelector('.memo-input');
+  if (weightInput) weightInput.addEventListener('input', autoSave);
+  if (memoInput) memoInput.addEventListener('input', autoSave);
+});
 
 function selectPeriodTab(el) {
   document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
