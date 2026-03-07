@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Bloom 🌸 Wireframe</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    max-width: 393px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* Page info banner */
+  .page-info {
+    background: #fff3cd;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 11px;
+    color: #856404;
+  }
+
+  /* Screen container */
+  .screen { display: none; min-height: calc(100vh - 100px); background: #fff; padding-bottom: 130px; }
+  .screen.active { display: block; }
+
+  /* ===== HOME SCREEN ===== */
+  .home-header {
+    text-align: center;
+    padding: 16px 20px 0;
+    position: relative;
+  }
+  .home-header h1 { font-size: 22px; color: #c77d9a; }
+  .home-header p { font-size: 13px; color: #999; margin-top: 3px; }
+  .settings-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fdf2f6;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cycle-ring {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 7px solid #f0d4e0;
+    margin: 12px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fdf2f6 0%, #fff 100%);
+  }
+  .cycle-ring .day-count { font-size: 32px; font-weight: 700; color: #c77d9a; line-height: 1; }
+  .cycle-ring .day-label { font-size: 11px; color: #bbb; margin-bottom: 2px; letter-spacing: 1px; }
+  .cycle-ring .divider { width: 30px; height: 1px; background: #e8d0dc; margin: 6px auto; }
+  .cycle-ring .phase { font-size: 12px; color: #c77d9a; font-weight: 600; }
+
+  .quick-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 16px 20px;
+  }
+  .stat-card {
+    background: #fdf8fa;
+    border-radius: 14px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+  .stat-card .icon { font-size: 20px; }
+  .stat-card .value { font-size: 16px; font-weight: 700; color: #333; margin: 2px 0; }
+  .stat-card .label { font-size: 11px; color: #999; }
+
+  /* Record section on home */
+  .weight-record {
+    text-align: center;
+    margin: 28px 20px 20px;
+    background: #fdf8fa;
+    border-radius: 20px;
+    padding: 20px;
+  }
+  .weight-record-label {
+    font-size: 13px;
+    color: #c77d9a;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .weight-record-input {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+  }
+  .weight-record-input input {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid #e8b4c8;
+    background: none;
+    width: 110px;
+    text-align: center;
+    outline: none;
+    padding-bottom: 4px;
+    -moz-appearance: textfield;
+  }
+  .weight-record-input input:focus {
+    border-bottom-color: #c77d9a;
+  }
+  .weight-record-input input::-webkit-outer-spin-button,
+  .weight-record-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  .weight-record-input span {
+    font-size: 16px;
+    color: #999;
+    font-weight: 400;
+  }
+  .weight-record-hint {
+    font-size: 11px;
+    color: #bbb;
+    margin-top: 8px;
+  }
+  .auto-save-msg {
+    font-size: 12px;
+    color: #bbb;
+    margin-top: 6px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* Weight input inline (legacy) */
+  .weight-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .weight-inline input {
+    width: 90px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #e8b4c8;
+    background: transparent;
+    color: #333;
+    outline: none;
+    padding: 4px;
+  }
+  .weight-inline span { font-size: 16px; color: #999; }
+
+  /* Flow options */
+  .flow-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .flow-option {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 11px;
+    color: #666;
+  }
+  .flow-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #e8b4c8;
+    margin-bottom: 4px;
+  }
+  .flow-option:nth-child(2) .flow-dot { width: 14px; height: 14px; }
+  .flow-option:nth-child(3) .flow-dot { width: 18px; height: 18px; }
+  .flow-option:nth-child(4) { background: #f5f5f5; }
+  .flow-option:nth-child(4) .flow-dot { background: #ccc; }
+  .flow-option.selected { border-color: #c77d9a; background: #fdf2f6; }
+
+  /* Mood */
+  .mood-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 4px 0;
+  }
+  .mood-item {
+    text-align: center;
+    font-size: 26px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 0.2s;
+  }
+  .mood-item.selected { opacity: 1; transform: scale(1.2); }
+  .mood-item .mood-label { font-size: 10px; color: #999; margin-top: 2px; }
+
+  /* Symptom tags */
+  .symptom-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .symptom-tag {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    background: #fff;
+    color: #666;
+    border: 1px solid #eee;
+    cursor: pointer;
+  }
+  .symptom-tag.selected { background: #fdf2f6; color: #c77d9a; border-color: #e8b4c8; }
+
+  /* Memo */
+  .memo-input {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    resize: none;
+    font-family: inherit;
+    background: #fff;
+  }
+
+  /* Save button */
+  .save-btn {
+    display: block;
+    margin: 16px 20px 20px;
+    padding: 14px;
+    background: linear-gradient(135deg, #e8b4c8, #c77d9a);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    width: calc(100% - 40px);
+  }
+
+  /* Period toggle button */
+  .period-toggle {
+    margin: 0 auto 8px;
+    width: fit-content;
+    cursor: pointer;
+  }
+  .period-toggle-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    border-radius: 30px;
+    background: #fff;
+    border: 2px solid #e8b4c8;
+    transition: all 0.3s;
+  }
+  .period-toggle-inner.active {
+    background: linear-gradient(135deg, #f8d7e6, #e8b4c8);
+    border-color: #c77d9a;
+  }
+  .period-icon { font-size: 20px; }
+  .period-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #c77d9a;
+  }
+  .period-toggle-inner.active .period-text {
+    color: #fff;
+  }
+
+  /* ===== CALENDAR SCREEN ===== */
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+  }
+  .calendar-header h2 { font-size: 18px; color: #333; }
+  .calendar-header button {
+    background: none; border: none; font-size: 20px; cursor: pointer; color: #c77d9a;
+  }
+
+  .calendar-grid { padding: 0 12px; }
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 8px;
+  }
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    text-align: center;
+  }
+  .calendar-day {
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+    border-radius: 50%;
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+  }
+  .calendar-day.period { background: #fce8f0; color: #c77d9a; font-weight: 600; }
+  .calendar-day.predicted { border: 2px dashed #e8b4c8; color: #c77d9a; }
+  .calendar-day.fertile { 
+    background: none; 
+    color: #333;
+    position: relative;
+  }
+  .calendar-day.fertile::before {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    width: 16px;
+    height: 3px;
+    border-radius: 2px;
+    background: #a8d8b9;
+  }
+  .calendar-day.ovulation { 
+    background: #d4f0e8; 
+    color: #5fa88a; 
+    font-weight: 600;
+  }
+  .calendar-day.today { border: 2px solid #c77d9a; font-weight: 700; }
+  .calendar-day.has-record { position: relative; }
+  .calendar-day.has-record::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #c77d9a;
+  }
+
+  .calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 12px;
+    font-size: 11px;
+    color: #666;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 3px;
+    vertical-align: middle;
+  }
+
+  /* Day detail card */
+  .day-detail {
+    margin: 0 20px 20px;
+    background: #fdf8fa;
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .day-detail h3 { font-size: 15px; color: #333; margin-bottom: 10px; }
+  .day-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    color: #666;
+    border-bottom: 1px solid #f0e8ec;
+  }
+  .day-detail-row:last-child { border-bottom: none; }
+  .day-detail-row .val { font-weight: 600; color: #333; }
+
+  /* ===== STATS SCREEN ===== */
+  .stats-header {
+    padding: 20px;
+    text-align: center;
+  }
+  .stats-header h2 { font-size: 18px; color: #333; }
+
+  .stats-toggle {
+    display: flex;
+    margin: 0 20px 16px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .stats-toggle button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    color: #999;
+    cursor: pointer;
+  }
+  .stats-toggle button.active {
+    background: #e8b4c8;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+    font-weight: 700;
+  }
+
+  /* Weight chart */
+  .stats-chart {
+    margin: 0 20px 16px;
+    height: 200px;
+    background: #fdf8fa;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    padding: 16px;
+  }
+  .stats-chart h4 {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .chart-area {
+    position: relative;
+    height: 120px;
+  }
+  .chart-svg { width: 100%; height: 100%; }
+  .chart-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #999;
+    margin-top: 8px;
+  }
+
+  /* Stats cards */
+  .stats-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 20px 16px;
+  }
+  .stats-card {
+    background: #fdf8fa;
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stats-card .sc-icon { font-size: 24px; margin-bottom: 4px; }
+  .stats-card .sc-value { font-size: 22px; font-weight: 700; color: #333; }
+  .stats-card .sc-label { font-size: 11px; color: #999; margin-top: 2px; }
+  .stats-card .sc-sub { font-size: 11px; color: #5fa88a; margin-top: 2px; }
+
+  /* Cycle stats */
+  .cycle-stats {
+    margin: 0 20px 20px;
+    background: #fdf8fa;
+    border-radius: 16px;
+    padding: 16px;
+  }
+  .cycle-stats h4 { font-size: 13px; color: #666; margin-bottom: 12px; }
+  .cycle-bar {
+    display: flex;
+    height: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .cycle-bar .phase-period { background: #f8d7e6; flex: 5; }
+  .cycle-bar .phase-follicular { background: #fef3c7; flex: 8; }
+  .cycle-bar .phase-ovulation { background: #d4f0e8; flex: 2; }
+  .cycle-bar .phase-luteal { background: #e8d4f0; flex: 13; }
+  .cycle-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #999;
+  }
+
+  /* Settings */
+  .settings-section {
+    margin-bottom: 20px;
+  }
+  .settings-title {
+    font-size: 14px;
+    color: #c77d9a;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: #fdf8fa;
+    border-radius: 12px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #333;
+  }
+  .settings-value {
+    color: #999;
+    font-size: 14px;
+  }
+  .toggle-switch {
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+    background: #ddd;
+    position: relative;
+    cursor: pointer;
+  }
+  .toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    top: 2px;
+    left: 2px;
+    transition: 0.2s;
+  }
+  .toggle-switch.on {
+    background: #c77d9a;
+  }
+  .toggle-switch.on::after {
+    left: 22px;
+  }
+
+  /* Weight log list */
+  .weight-log-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    background: #fdf8fa;
+    border-radius: 14px;
+    border-left: 4px solid #f0d4e0;
+  }
+  .wl-date { width: 48px; }
+  .wl-day { font-size: 15px; font-weight: 700; color: #c77d9a; }
+  .wl-weekday { font-size: 10px; color: #bbb; margin-top: 1px; }
+  .wl-weight {
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+  .wl-unit { font-size: 12px; color: #bbb; font-weight: 400; margin-left: 1px; }
+  .wl-change {
+    min-width: 50px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 10px;
+  }
+  .wl-change.down { color: #5ba8d4; background: #e8f4fd; }
+  .wl-change.up { color: #d47b7b; background: #fdf2f2; }
+
+  /* Y-axis labels */
+  .y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 4px 0;
+    width: 28px;
+    flex-shrink: 0;
+  }
+  .y-axis span {
+    font-size: 10px;
+    color: #bbb;
+    text-align: right;
+    padding-right: 4px;
+  }
+
+  /* Period tabs (weight chart) */
+  .period-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .period-tab {
+    flex: 1;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    color: #999;
+    background: #f5f5f5;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .period-tab.active {
+    background: #e8b4c8;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* Cycle history items */
+  .cycle-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: #fdf8fa;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+  .cycle-delete-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #ccc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cycle-delete-btn:hover {
+    color: #e8837c;
+    background: #fdf2f2;
+  }
+  .cycle-history-item.predicted-item {
+    background: #f8f4fe;
+    border: 1px dashed #d4c4e8;
+  }
+  .cycle-hist-left { flex: 1; }
+  .cycle-hist-year {
+    font-size: 10px;
+    color: #bbb;
+    margin-bottom: 1px;
+  }
+  .cycle-hist-date {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+  }
+  .cycle-hist-sub {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+  }
+  .cycle-hist-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .cycle-hist-right .cycle-hist-date {
+    color: #c77d9a;
+    font-weight: 700;
+  }
+
+  /* ===== FIXED BOTTOM AREA ===== */
+  .fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 393px;
+    z-index: 100;
+    background: #fff;
+  }
+
+  /* ===== AD BANNER ===== */
+  .ad-banner {
+    height: 50px;
+    background: #f5f5f5;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===== BOTTOM TAB BAR ===== */
+  .tab-bar {
+    display: flex;
+    justify-content: space-around;
+    background: #fff;
+    border-top: 1px solid #eee;
+    padding: 8px 0 20px;
+  }
+  .tab-item {
+    text-align: center;
+    cursor: pointer;
+    flex: 1;
+    padding: 4px;
+  }
+  .tab-item .tab-icon { font-size: 22px; }
+  .tab-item .tab-label { font-size: 10px; color: #999; margin-top: 2px; }
+  .tab-item.active .tab-label { color: #c77d9a; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="page-info">
+  📍 시뮬레이션: 3/7 기록 없는 날짜 클릭 → 추가 버튼
+</div>
+
+<!-- ==================== HOME SCREEN ==================== -->
+<div id="home" class="screen">
+  <div class="home-header">
+    <h1>Bloom 🌸</h1>
+    <p>2026년 3월 6일 금요일</p>
+
+  </div>
+
+  <div class="cycle-ring">
+    <div class="day-label">다음 생리</div>
+    <div class="day-count">D-5</div>
+    <div class="divider"></div>
+    <div class="phase">🌱 배란기</div>
+  </div>
+
+  <!-- 생리 시작/끝 버튼 -->
+  <div class="period-toggle" onclick="togglePeriod()">
+    <div class="period-toggle-inner" id="periodBtn">
+      <span class="period-icon">🩸</span>
+      <span class="period-text">생리 시작</span>
+    </div>
+  </div>
+
+  <!-- 요약 카드 제거 (도뚜: 링+통계에서 충분) -->
+
+  <!-- 퀵 기록 섹션 (항상 보임) -->
+  <div class="weight-record">
+    <div class="weight-record-label">⚖️ 오늘의 체중</div>
+    <div class="weight-record-input">
+      <input type="number" value="58.2" step="0.1">
+      <span>kg</span>
+    </div>
+    <div class="weight-record-hint">어제 기록: 58.5 kg</div>
+    <div id="autoSaveMsg" class="auto-save-msg">✓ 저장됨</div>
+  </div>
+</div>
+
+<!-- ==================== CALENDAR SCREEN ==================== -->
+<div id="calendar" class="screen active">
+  <div class="calendar-header">
+    <button>‹</button>
+    <h2>2026년 3월</h2>
+    <button>›</button>
+  </div>
+
+  <div class="calendar-grid">
+    <div class="calendar-weekdays">
+      <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+    </div>
+    <div class="calendar-days">
+      <div class="calendar-day">1</div>
+      <div class="calendar-day has-record">2</div>
+      <div class="calendar-day has-record">3</div>
+      <div class="calendar-day has-record">4</div>
+      <div class="calendar-day has-record">5</div>
+      <div class="calendar-day today has-record">6</div>
+      <div class="calendar-day" style="background:#f0e8ec;font-weight:700;">7</div>
+      <div class="calendar-day">8</div>
+      <div class="calendar-day">9</div>
+      <div class="calendar-day">10</div>
+      <div class="calendar-day predicted">11</div>
+      <div class="calendar-day predicted">12</div>
+      <div class="calendar-day predicted">13</div>
+      <div class="calendar-day predicted">14</div>
+      <div class="calendar-day predicted">15</div>
+      <div class="calendar-day">16</div>
+      <div class="calendar-day fertile">17</div>
+      <div class="calendar-day fertile">18</div>
+      <div class="calendar-day fertile">19</div>
+      <div class="calendar-day fertile">20</div>
+      <div class="calendar-day fertile">21</div>
+      <div class="calendar-day ovulation">22</div>
+      <div class="calendar-day fertile">23</div>
+      <div class="calendar-day">24</div>
+      <div class="calendar-day">25</div>
+      <div class="calendar-day">26</div>
+      <div class="calendar-day">27</div>
+      <div class="calendar-day">28</div>
+      <div class="calendar-day">29</div>
+      <div class="calendar-day">30</div>
+      <div class="calendar-day">31</div>
+    </div>
+  </div>
+
+  <div class="calendar-legend">
+    <span><span class="legend-dot" style="background:#fce8f0"></span> 생리</span>
+    <span><span class="legend-dot" style="background:#fff;border:2px dashed #e8b4c8;width:8px;height:8px"></span> 예정</span>
+    <span><span class="legend-dot" style="background:#a8d8b9;width:14px;height:3px;border-radius:2px"></span> 가임기</span>
+    <span><span class="legend-dot" style="background:#d4f0e8"></span> 배란</span>
+    <span><span class="legend-dot" style="background:#c77d9a;width:5px;height:5px"></span> 기록</span>
+  </div>
+
+  <!-- 선택한 날짜 상세 (기록 없음) -->
+  <div class="day-detail">
+    <h3>📋 3월 7일 (토)</h3>
+    <div style="text-align:center;padding:16px 0;">
+      <div style="font-size:14px;color:#bbb;margin-bottom:14px;">기록이 없습니다</div>
+      <button id="addRecordBtn" onclick="showAddForm()" style="
+        display:inline-flex;align-items:center;gap:6px;
+        padding:12px 28px;
+        background:linear-gradient(135deg, #e8b4c8, #c77d9a);
+        color:#fff;border:none;border-radius:14px;
+        font-size:14px;font-weight:600;cursor:pointer;
+      ">＋ 기록 추가</button>
+    </div>
+
+    <!-- 추가 폼 (숨김 → 버튼 누르면 표시) -->
+    <div id="addRecordForm" style="display:none;">
+      <div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span>🩸 생리</span>
+          <div style="display:flex;gap:6px;margin-left:auto;">
+            <span style="padding:4px 12px;border-radius:10px;background:#fdf2f6;color:#c77d9a;font-size:12px;cursor:pointer;">시작</span>
+          </div>
+        </div>
+      </div>
+      <div class="day-detail-row">
+        <span>⚖️ 체중</span>
+        <div style="display:flex;align-items:baseline;gap:4px;">
+          <input type="number" step="0.1" placeholder="0.0" style="
+            width:70px;font-size:16px;font-weight:600;text-align:center;
+            border:none;border-bottom:2px solid #e8b4c8;background:none;outline:none;color:#333;
+          ">
+          <span style="font-size:13px;color:#999;">kg</span>
+        </div>
+      </div>
+      <div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:6px;">
+        <span>📝 메모</span>
+        <textarea class="memo-input" placeholder="오늘 특이사항이 있다면..." style="height:50px;margin:0;font-size:13px;"></textarea>
+      </div>
+      <button onclick="saveRecord()" style="
+        width:100%;margin-top:12px;padding:12px;
+        background:linear-gradient(135deg, #e8b4c8, #c77d9a);
+        color:#fff;border:none;border-radius:12px;
+        font-size:14px;font-weight:600;cursor:pointer;
+      ">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CYCLE/PERIOD SCREEN ==================== -->
+<div id="cycle" class="screen">
+  <div style="padding:20px 20px 0;">
+    <h2 style="font-size:18px;color:#333;text-align:center;margin-bottom:16px;">📊 통계</h2>
+  </div>
+
+  <!-- 토글: 주기(왼쪽) / 체중(오른쪽) -->
+  <div class="stats-toggle" style="margin:0 20px 16px;">
+    <button class="active" onclick="toggleMainView(this, 'cycle-view')">주기</button>
+    <button onclick="toggleMainView(this, 'weight-view')">체중</button>
+  </div>
+
+  <!-- === 주기 뷰 === -->
+  <div id="cycle-view">
+
+  <!-- 주기 요약 카드 -->
+  <div style="padding:0 20px 20px;">
+    <h3 style="font-size:15px;color:#666;margin-bottom:12px;">🩸 생리 주기</h3>
+    
+    <div class="stats-cards" style="padding:0;">
+      <div class="stats-card">
+        <div class="sc-icon">🩸</div>
+        <div class="sc-value" style="font-size:14px;">2/21</div>
+        <div class="sc-label">마지막 생리</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">📅</div>
+        <div class="sc-value" style="font-size:14px;">3/11</div>
+        <div class="sc-label">다음 예상일</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">🔄</div>
+        <div class="sc-value">28일</div>
+        <div class="sc-label">평균 주기</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">⏱️</div>
+        <div class="sc-value">5일</div>
+        <div class="sc-label">평균 기간</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 주기 진행 바 -->
+  <div style="margin:0 20px 20px;">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:#999;margin-bottom:6px;">
+      <span>1일</span>
+      <span>오늘 (14일)</span>
+      <span>28일</span>
+    </div>
+    <div style="height:8px;background:#f0e8ec;border-radius:4px;position:relative;">
+      <div style="position:absolute;left:0;top:0;height:100%;width:18%;background:#f8d7e6;border-radius:4px 0 0 4px;"></div>
+      <div style="position:absolute;left:50%;top:-4px;width:16px;height:16px;background:#c77d9a;border-radius:50%;transform:translateX(-50%);border:2px solid #fff;"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb;margin-top:6px;">
+      <span>생리</span>
+      <span>여포기</span>
+      <span>배란</span>
+      <span>황체기</span>
+    </div>
+  </div>
+
+  <!-- 서브 토글: 지난 기간 / 예상 기간 -->
+  <div class="stats-toggle" style="margin:0 20px 12px;">
+    <button class="active" onclick="toggleCycleView(this, 'past')">지난 기간</button>
+    <button onclick="toggleCycleView(this, 'predicted')">예상 기간</button>
+  </div>
+
+  <!-- 지난 기간 리스트 -->
+  <div id="past-cycles" style="padding:0 20px 20px;">
+    <div class="cycle-history-item">
+      <div class="cycle-hist-left">
+        <div class="cycle-hist-year">2026</div>
+        <div class="cycle-hist-date">2/21 ~ 2/25</div>
+      </div>
+      <div class="cycle-hist-right"><div class="cycle-hist-year">주기</div><div class="cycle-hist-date">28일</div></div>
+      <button class="cycle-delete-btn">✕</button>
+    </div>
+    <div class="cycle-history-item">
+      <div class="cycle-hist-left">
+        <div class="cycle-hist-year">2026</div>
+        <div class="cycle-hist-date">1/24 ~ 1/29</div>
+      </div>
+      <div class="cycle-hist-right"><div class="cycle-hist-year">주기</div><div class="cycle-hist-date">27일</div></div>
+      <button class="cycle-delete-btn">✕</button>
+    </div>
+    <div class="cycle-history-item">
+      <div class="cycle-hist-left">
+        <div class="cycle-hist-year">2025 ~ 2026</div>
+        <div class="cycle-hist-date">12/28 ~ 1/1</div>
+      </div>
+      <div class="cycle-hist-right"><div class="cycle-hist-year">주기</div><div class="cycle-hist-date">29일</div></div>
+      <button class="cycle-delete-btn">✕</button>
+    </div>
+    <div class="cycle-history-item">
+      <div class="cycle-hist-left">
+        <div class="cycle-hist-year">2025</div>
+        <div class="cycle-hist-date">11/29 ~ 12/3</div>
+      </div>
+      <div class="cycle-hist-right"><div class="cycle-hist-year">주기</div><div class="cycle-hist-date">28일</div></div>
+      <button class="cycle-delete-btn">✕</button>
+    </div>
+    <div class="cycle-history-item">
+      <div class="cycle-hist-left">
+        <div class="cycle-hist-year">2025</div>
+        <div class="cycle-hist-date">11/1 ~ 11/5</div>
+      </div>
+      <div class="cycle-hist-right"><div class="cycle-hist-year">주기</div><div class="cycle-hist-date">28일</div></div>
+      <button class="cycle-delete-btn">✕</button>
+    </div>
+  </div>
+
+  <!-- 예상 기간 리스트 -->
+  <div id="predicted-cycles" style="padding:0 20px 20px;display:none;">
+    <div class="cycle-history-item predicted-item">
+      <div class="cycle-hist-left">
+        <div class="cycle-hist-year">2026</div>
+        <div class="cycle-hist-date">3/11 ~ 3/15</div>
+      </div>
+      <div class="cycle-hist-right"><div class="cycle-hist-year">다음</div><div class="cycle-hist-date">5일 후</div></div>
+    </div>
+    <div class="cycle-history-item predicted-item">
+      <div class="cycle-hist-left">
+        <div class="cycle-hist-year">2026</div>
+        <div class="cycle-hist-date">4/8 ~ 4/12</div>
+      </div>
+      <div class="cycle-hist-right"><div class="cycle-hist-year">주기</div><div class="cycle-hist-date">28일</div></div>
+    </div>
+    <div class="cycle-history-item predicted-item">
+      <div class="cycle-hist-left">
+        <div class="cycle-hist-year">2026</div>
+        <div class="cycle-hist-date">5/6 ~ 5/10</div>
+      </div>
+      <div class="cycle-hist-right"><div class="cycle-hist-year">주기</div><div class="cycle-hist-date">28일</div></div>
+    </div>
+  </div>
+
+  </div><!-- end cycle-view -->
+
+  <!-- === 체중 뷰 === -->
+  <div id="weight-view" style="display:none;">
+    <div style="padding:0 20px 16px;">
+      <div class="stats-chart" style="margin:0;">
+        <div class="period-tabs">
+          <span class="period-tab" onclick="selectPeriodTab(this)">1주</span>
+          <span class="period-tab active" onclick="selectPeriodTab(this)">1개월</span>
+          <span class="period-tab" onclick="selectPeriodTab(this)">3개월</span>
+          <span class="period-tab" onclick="selectPeriodTab(this)">6개월</span>
+          <span class="period-tab" onclick="selectPeriodTab(this)">1년</span>
+          <span class="period-tab" onclick="selectPeriodTab(this)">전체</span>
+        </div>
+        <div class="chart-area" style="display:flex;gap:0;">
+          <div class="y-axis">
+            <span>60</span>
+            <span>58</span>
+            <span>56</span>
+            <span>54</span>
+          </div>
+          <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none" style="flex:1;">
+            <defs>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#e8b4c8;stop-opacity:0.3"/>
+                <stop offset="100%" style="stop-color:#e8b4c8;stop-opacity:0"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="85" x2="300" y2="85" stroke="#5fa88a" stroke-width="1" stroke-dasharray="4"/>
+            <path d="M0,20 L30,25 L60,22 L90,30 L120,28 L150,35 L180,32 L210,40 L240,38 L270,42 L300,45"
+                  fill="none" stroke="#c77d9a" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M0,20 L30,25 L60,22 L90,30 L120,28 L150,35 L180,32 L210,40 L240,38 L270,42 L300,45 L300,100 L0,100Z"
+                  fill="url(#grad2)"/>
+            <circle cx="300" cy="45" r="4" fill="#c77d9a" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="chart-labels">
+          <span>2/5</span><span>2/12</span><span>2/19</span><span>2/26</span><span>3/6</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-cards" style="padding:0 20px 20px;">
+      <div class="stats-card">
+        <div class="sc-icon">⚖️</div>
+        <div class="sc-value">58.2</div>
+        <div class="sc-label">현재 체중 (kg)</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">🎯</div>
+        <div class="sc-value">55.0</div>
+        <div class="sc-label">목표 체중 (kg)</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">📉</div>
+        <div class="sc-value">-0.9</div>
+        <div class="sc-label">총 변화</div>
+        <div class="sc-sub">시작: 59.1kg</div>
+      </div>
+      <div class="stats-card">
+        <div class="sc-icon">📅</div>
+        <div class="sc-value">-0.3</div>
+        <div class="sc-label">이번 주</div>
+        <div class="sc-sub">▼ 감소 중</div>
+      </div>
+    </div>
+
+    <!-- 체중 기록 목록 -->
+    <div style="padding:0 20px 20px;">
+      <h4 style="font-size:14px;color:#333;margin-bottom:10px;">📋 기록 목록</h4>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/6</div>
+          <div class="wl-weekday">목요일</div>
+        </div>
+        <div class="wl-weight">58.2<span class="wl-unit">kg</span></div>
+        <div class="wl-change down">-0.3</div>
+      </div>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/5</div>
+          <div class="wl-weekday">수요일</div>
+        </div>
+        <div class="wl-weight">58.5<span class="wl-unit">kg</span></div>
+        <div class="wl-change down">-0.1</div>
+      </div>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/4</div>
+          <div class="wl-weekday">화요일</div>
+        </div>
+        <div class="wl-weight">58.6<span class="wl-unit">kg</span></div>
+        <div class="wl-change up">+0.2</div>
+      </div>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/3</div>
+          <div class="wl-weekday">월요일</div>
+        </div>
+        <div class="wl-weight">58.4<span class="wl-unit">kg</span></div>
+        <div class="wl-change down">-0.5</div>
+      </div>
+
+      <div class="weight-log-item">
+        <div class="wl-date">
+          <div class="wl-day">3/2</div>
+          <div class="wl-weekday">일요일</div>
+        </div>
+        <div class="wl-weight">58.9<span class="wl-unit">kg</span></div>
+        <div class="wl-change up">+0.1</div>
+      </div>
+    </div>
+
+  </div><!-- end weight-view -->
+
+</div>
+
+<!-- ===== SETTINGS SCREEN ===== -->
+<div class="screen" id="settings-screen" style="display:none;">
+  <div style="padding:20px;">
+    <div style="display:flex;align-items:center;margin-bottom:20px;">
+      <button onclick="showScreen('home')" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0;margin-right:12px;">←</button>
+      <h2 style="font-size:20px;color:#c77d9a;margin:0;">MY 🌸</h2>
+    </div>
+
+    <!-- 내 정보 -->
+    <div class="settings-section">
+      <h3 class="settings-title">👤 내 정보</h3>
+      <div class="settings-item">
+        <span>출생연도</span>
+        <span class="settings-value">1995년</span>
+      </div>
+      <div class="settings-item">
+        <span>평균 주기</span>
+        <span class="settings-value">28일</span>
+      </div>
+      <div class="settings-item">
+        <span>평균 생리 기간</span>
+        <span class="settings-value">5일</span>
+      </div>
+      <div class="settings-item">
+        <span>목표 체중</span>
+        <span class="settings-value">55.0 kg</span>
+      </div>
+    </div>
+
+    <!-- 알림 -->
+    <div class="settings-section">
+      <h3 class="settings-title">🔔 알림</h3>
+      <div class="settings-item">
+        <span>생리 예정일 알림</span>
+        <div class="toggle-switch on"></div>
+      </div>
+      <div class="settings-item">
+        <span>자동종료 알림</span>
+        <div class="toggle-switch on"></div>
+      </div>
+      <div class="settings-item">
+        <span>체중 기록 리마인더</span>
+        <span class="settings-value">매일 08:00</span>
+      </div>
+    </div>
+
+    <!-- 보안 -->
+    <div class="settings-section">
+      <h3 class="settings-title">🔒 보안</h3>
+      <div class="settings-item">
+        <span>앱 잠금</span>
+        <div class="toggle-switch on"></div>
+      </div>
+      <div class="settings-item">
+        <span>잠금 방식</span>
+        <span class="settings-value">Face ID</span>
+      </div>
+      <div class="settings-item">
+        <span>잠금 타이밍</span>
+        <span class="settings-value">즉시</span>
+      </div>
+    </div>
+
+    <!-- 데이터 -->
+    <div class="settings-section">
+      <h3 class="settings-title">📦 데이터</h3>
+      <div class="settings-item">
+        <span>데이터 백업</span>
+        <span class="settings-value">›</span>
+      </div>
+      <div class="settings-item">
+        <span>데이터 내보내기 (CSV)</span>
+        <span class="settings-value">›</span>
+      </div>
+      <div class="settings-item" style="color:#e8837c;">
+        <span>계정 삭제</span>
+        <span class="settings-value" style="color:#e8837c;">›</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== FIXED BOTTOM (AD + TAB) ===== -->
+<div class="fixed-bottom">
+  <div class="ad-banner">
+    <span style="font-size:11px;color:#999;letter-spacing:1px;">AD</span>
+    <span style="font-size:12px;color:#bbb;margin-left:8px;">광고 영역 (AdMob 배너)</span>
+  </div>
+  <div class="tab-bar">
+  <div class="tab-item" onclick="showScreen('home')">
+    <div class="tab-icon">🏠</div>
+    <div class="tab-label">홈</div>
+  </div>
+  <div class="tab-item active" onclick="showScreen('calendar')">
+    <div class="tab-icon">🗓</div>
+    <div class="tab-label">캘린더</div>
+  </div>
+  <div class="tab-item" onclick="showScreen('cycle')">
+    <div class="tab-icon">📈</div>
+    <div class="tab-label">통계</div>
+  </div>
+  <div class="tab-item" onclick="showScreen('settings')">
+    <div class="tab-icon">🌸</div>
+    <div class="tab-label">MY</div>
+  </div>
+</div><!-- end tab-bar -->
+</div><!-- end fixed-bottom -->
+
+<script>
+const screens = ['home', 'calendar', 'cycle', 'settings'];
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('settings-screen').style.display = 'none';
+  if (id === 'settings') {
+    document.getElementById('settings-screen').style.display = 'block';
+  } else {
+    document.getElementById(id).classList.add('active');
+  }
+  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+  const idx = screens.indexOf(id);
+  if (idx >= 0) document.querySelectorAll('.tab-item')[idx].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function togglePeriod() {
+  const btn = document.getElementById('periodBtn');
+  const text = btn.querySelector('.period-text');
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    text.textContent = '생리 시작';
+  } else {
+    btn.classList.add('active');
+    text.textContent = '생리 중 · 탭하여 종료';
+  }
+}
+
+// 자동 저장 (디바운스)
+let saveTimer;
+function autoSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    const msg = document.getElementById('autoSaveMsg');
+    msg.style.opacity = '1';
+    setTimeout(() => { msg.style.opacity = '0'; }, 1500);
+  }, 1000);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const weightInput = document.querySelector('.weight-record-input input');
+  const memoInput = document.querySelector('.memo-input');
+  if (weightInput) weightInput.addEventListener('input', autoSave);
+  if (memoInput) memoInput.addEventListener('input', autoSave);
+});
+
+function selectPeriodTab(el) {
+  document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function toggleExpand() {
+  const area = document.getElementById('expandArea');
+  const btn = document.getElementById('expandBtn');
+  if (area.style.display === 'none') {
+    area.style.display = 'block';
+    btn.innerHTML = '<span style="font-size:13px;color:#999;font-weight:600;">▲ 접기</span>';
+  } else {
+    area.style.display = 'none';
+    btn.innerHTML = '<span style="font-size:13px;color:#c77d9a;font-weight:600;">＋ 더 기록하기 (생리량 · 기분 · 증상 · 메모)</span>';
+  }
+}
+
+function selectMood(el) {
+  document.querySelectorAll('.mood-item').forEach(m => m.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function selectFlow(el) {
+  document.querySelectorAll('.flow-option').forEach(f => f.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function toggleMainView(btn, viewId) {
+  btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('cycle-view').style.display = viewId === 'cycle-view' ? 'block' : 'none';
+  document.getElementById('weight-view').style.display = viewId === 'weight-view' ? 'block' : 'none';
+}
+
+function showAddForm() {
+  document.getElementById('addRecordBtn').style.display = 'none';
+  document.getElementById('addRecordForm').style.display = 'block';
+}
+
+function saveRecord() {
+  document.getElementById('addRecordForm').style.display = 'none';
+  const detail = document.querySelector('.day-detail');
+  detail.innerHTML = '<h3>📋 3월 7일 (토)</h3><div style="text-align:center;padding:16px 0;color:#5fa88a;font-size:14px;">✓ 저장되었습니다</div>';
+}
+
+function toggleCycleView(btn, view) {
+  btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('past-cycles').style.display = view === 'past' ? 'block' : 'none';
+  document.getElementById('predicted-cycles').style.display = view === 'predicted' ? 'block' : 'none';
+}
+</script>
+
+</body>
+</html>
