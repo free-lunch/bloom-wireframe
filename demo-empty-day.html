@@ -829,7 +829,11 @@
       <div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:8px;">
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span>🩸 생리 시작</span>
-          <div class="toggle-switch" onclick="this.classList.toggle('on');checkSaveBtn()"></div>
+          <div class="toggle-switch" id="toggleStart" onclick="togglePeriodStart(this)"></div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
+          <span>🏁 생리 종료</span>
+          <div class="toggle-switch" id="toggleEnd" onclick="togglePeriodEnd(this)"></div>
         </div>
       </div>
       <div class="day-detail-row">
@@ -1303,12 +1307,29 @@ function toggleMainView(btn, viewId) {
   document.getElementById('weight-view').style.display = viewId === 'weight-view' ? 'block' : 'none';
 }
 
+function togglePeriodStart(el) {
+  el.classList.toggle('on');
+  if (el.classList.contains('on')) {
+    document.getElementById('toggleEnd').classList.remove('on');
+  }
+  checkSaveBtn();
+}
+
+function togglePeriodEnd(el) {
+  el.classList.toggle('on');
+  if (el.classList.contains('on')) {
+    document.getElementById('toggleStart').classList.remove('on');
+  }
+  checkSaveBtn();
+}
+
 function checkSaveBtn() {
-  const toggle = document.querySelector('#addRecordForm .toggle-switch');
+  const start = document.getElementById('toggleStart');
+  const end = document.getElementById('toggleEnd');
   const weight = document.querySelector('#addRecordForm input[type="text"]');
   const memo = document.querySelector('#addRecordForm textarea');
   const btn = document.getElementById('saveBtn');
-  const hasInput = toggle.classList.contains('on') || (weight && weight.value.trim()) || (memo && memo.value.trim());
+  const hasInput = (start && start.classList.contains('on')) || (end && end.classList.contains('on')) || (weight && weight.value.trim()) || (memo && memo.value.trim());
   btn.disabled = !hasInput;
   btn.style.background = hasInput ? 'linear-gradient(135deg, #e8b4c8, #c77d9a)' : '#e0e0e0';
   btn.style.cursor = hasInput ? 'pointer' : 'not-allowed';
@@ -1321,14 +1342,16 @@ function showAddForm() {
 }
 
 // 저장된 값 보관
-let savedData = { period: false, weight: '', memo: '' };
+let savedData = { periodStart: false, periodEnd: false, weight: '', memo: '' };
 
 function saveRecord() {
-  const toggle = document.querySelector('#addRecordForm .toggle-switch');
+  const start = document.getElementById('toggleStart');
+  const end = document.getElementById('toggleEnd');
   const weight = document.querySelector('#addRecordForm input[type="text"]');
   const memo = document.querySelector('#addRecordForm textarea');
   
-  savedData.period = toggle && toggle.classList.contains('on');
+  savedData.periodStart = start && start.classList.contains('on');
+  savedData.periodEnd = end && end.classList.contains('on');
   savedData.weight = weight ? weight.value.trim() : '';
   savedData.memo = memo ? memo.value.trim() : '';
   
@@ -1348,8 +1371,11 @@ function showSavedView() {
   }
   
   let html = '';
-  if (savedData.period) {
+  if (savedData.periodStart) {
     html += '<div class="day-detail-row"><span>🩸 생리</span><span class="val" style="color:#c77d9a;">시작일</span></div>';
+  }
+  if (savedData.periodEnd) {
+    html += '<div class="day-detail-row"><span>🏁 생리</span><span class="val" style="color:#999;">종료일</span></div>';
   }
   if (savedData.weight) {
     html += '<div class="day-detail-row"><span>⚖️ 체중</span><span class="val">' + savedData.weight + ' kg</span></div>';
@@ -1378,13 +1404,13 @@ function editRecord() {
   document.getElementById('savedView').style.display = 'none';
   document.getElementById('addRecordForm').style.display = 'block';
   
-  // 기존 값 복원
-  const toggle = document.querySelector('#addRecordForm .toggle-switch');
+  const start = document.getElementById('toggleStart');
+  const end = document.getElementById('toggleEnd');
   const weight = document.querySelector('#addRecordForm input[type="text"]');
   const memo = document.querySelector('#addRecordForm textarea');
   
-  if (savedData.period) toggle.classList.add('on');
-  else toggle.classList.remove('on');
+  if (savedData.periodStart) start.classList.add('on'); else start.classList.remove('on');
+  if (savedData.periodEnd) end.classList.add('on'); else end.classList.remove('on');
   if (weight) weight.value = savedData.weight;
   if (memo) memo.value = savedData.memo;
   
