@@ -829,7 +829,7 @@
       <div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:8px;">
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span>🩸 생리 시작</span>
-          <div class="toggle-switch" onclick="this.classList.toggle('on')"></div>
+          <div class="toggle-switch" onclick="this.classList.toggle('on');checkSaveBtn()"></div>
         </div>
       </div>
       <div class="day-detail-row">
@@ -838,19 +838,19 @@
           <input type="text" inputmode="decimal" placeholder="—" style="
             width:60px;font-size:16px;font-weight:600;text-align:center;
             border:none;border-bottom:2px solid transparent;background:none;outline:none;color:#333;
-          " onfocus="this.style.borderBottomColor='#e8b4c8'" onblur="this.style.borderBottomColor=this.value?'#e8b4c8':'transparent'">
+          " onfocus="this.style.borderBottomColor='#e8b4c8'" onblur="this.style.borderBottomColor=this.value?'#e8b4c8':'transparent'" oninput="checkSaveBtn()">
           <span style="font-size:13px;color:#bbb;">kg</span>
         </div>
       </div>
       <div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:6px;">
         <span>📝 메모</span>
-        <textarea class="memo-input" placeholder="오늘 특이사항이 있다면..." style="height:50px;margin:0;font-size:13px;"></textarea>
+        <textarea class="memo-input" placeholder="오늘 특이사항이 있다면..." style="height:50px;margin:0;font-size:13px;" oninput="checkSaveBtn()"></textarea>
       </div>
-      <button onclick="saveRecord()" style="
+      <button id="saveBtn" onclick="saveRecord()" disabled style="
         width:100%;margin-top:12px;padding:12px;
-        background:linear-gradient(135deg, #e8b4c8, #c77d9a);
+        background:#e0e0e0;
         color:#fff;border:none;border-radius:12px;
-        font-size:14px;font-weight:600;cursor:pointer;
+        font-size:14px;font-weight:600;cursor:not-allowed;
       ">저장</button>
     </div>
   </div>
@@ -1301,6 +1301,17 @@ function toggleMainView(btn, viewId) {
   btn.classList.add('active');
   document.getElementById('cycle-view').style.display = viewId === 'cycle-view' ? 'block' : 'none';
   document.getElementById('weight-view').style.display = viewId === 'weight-view' ? 'block' : 'none';
+}
+
+function checkSaveBtn() {
+  const toggle = document.querySelector('#addRecordForm .toggle-switch');
+  const weight = document.querySelector('#addRecordForm input[type="text"]');
+  const memo = document.querySelector('#addRecordForm textarea');
+  const btn = document.getElementById('saveBtn');
+  const hasInput = toggle.classList.contains('on') || (weight && weight.value.trim()) || (memo && memo.value.trim());
+  btn.disabled = !hasInput;
+  btn.style.background = hasInput ? 'linear-gradient(135deg, #e8b4c8, #c77d9a)' : '#e0e0e0';
+  btn.style.cursor = hasInput ? 'pointer' : 'not-allowed';
 }
 
 function showAddForm() {
