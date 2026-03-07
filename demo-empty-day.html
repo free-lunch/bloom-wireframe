@@ -1357,10 +1357,21 @@ function showSavedView() {
   if (savedData.memo) {
     html += '<div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:6px;"><span>📝 메모</span><div style="font-size:13px;color:#666;background:#f8f8f8;padding:10px;border-radius:8px;">' + savedData.memo + '</div></div>';
   }
-  html += '<button onclick="editRecord()" style="width:100%;margin-top:12px;padding:10px;background:none;border:1px solid #e0d5da;border-radius:12px;font-size:13px;color:#999;cursor:pointer;">✏️ 수정</button>';
+  html += '<div style="display:flex;gap:8px;margin-top:12px;">';
+  html += '<button onclick="editRecord()" style="flex:1;padding:10px;background:none;border:1px solid #e0d5da;border-radius:12px;font-size:13px;color:#999;cursor:pointer;">✏️ 수정</button>';
+  html += '<button onclick="deleteRecord()" style="flex:1;padding:10px;background:none;border:1px solid #f0d0d0;border-radius:12px;font-size:13px;color:#e08080;cursor:pointer;">🗑️ 삭제</button>';
+  html += '</div>';
   
   savedDiv.innerHTML = html;
   savedDiv.style.display = 'block';
+}
+
+function deleteRecord() {
+  if (!confirm('이 기록을 삭제할까요?')) return;
+  savedData = { period: false, weight: '', memo: '' };
+  document.getElementById('savedView').style.display = 'none';
+  document.getElementById('emptyMsg').style.display = 'block';
+  document.getElementById('addRecordBtn').style.display = 'inline-flex';
 }
 
 function editRecord() {
