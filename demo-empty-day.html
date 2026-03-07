@@ -827,11 +827,9 @@
     <!-- 추가 폼 (숨김 → 버튼 누르면 표시) -->
     <div id="addRecordForm" style="display:none;">
       <div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:8px;">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span>🩸 생리</span>
-          <div style="display:flex;gap:6px;margin-left:auto;">
-            <span style="padding:4px 12px;border-radius:10px;background:#fdf2f6;color:#c77d9a;font-size:12px;cursor:pointer;">시작</span>
-          </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span>🩸 생리 시작</span>
+          <div class="toggle-switch" onclick="this.classList.toggle('on')"></div>
         </div>
       </div>
       <div class="day-detail-row">
