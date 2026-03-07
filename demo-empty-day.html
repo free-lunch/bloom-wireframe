@@ -1320,9 +1320,25 @@ function showAddForm() {
 }
 
 function saveRecord() {
+  const toggle = document.querySelector('#addRecordForm .toggle-switch');
+  const weight = document.querySelector('#addRecordForm input[type="text"]');
+  const memo = document.querySelector('#addRecordForm textarea');
+  
   document.getElementById('addRecordForm').style.display = 'none';
+  
+  let html = '<h3>📋 3월 7일 (토)</h3>';
+  if (toggle && toggle.classList.contains('on')) {
+    html += '<div class="day-detail-row"><span>🩸 생리</span><span class="val" style="color:#c77d9a;">시작일</span></div>';
+  }
+  if (weight && weight.value.trim()) {
+    html += '<div class="day-detail-row"><span>⚖️ 체중</span><span class="val">' + weight.value.trim() + ' kg</span></div>';
+  }
+  if (memo && memo.value.trim()) {
+    html += '<div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:6px;"><span>📝 메모</span><div style="font-size:13px;color:#666;background:#f8f8f8;padding:10px;border-radius:8px;">' + memo.value.trim() + '</div></div>';
+  }
+  
   const detail = document.querySelector('.day-detail');
-  detail.innerHTML = '<h3>📋 3월 7일 (토)</h3><div style="text-align:center;padding:16px 0;color:#5fa88a;font-size:14px;">✓ 저장되었습니다</div>';
+  detail.innerHTML = html;
 }
 
 function toggleCycleView(btn, view) {
