@@ -814,7 +814,7 @@
   <div class="day-detail">
     <h3>📋 3월 7일 (토)</h3>
     <div style="text-align:center;padding:16px 0;">
-      <div style="font-size:14px;color:#bbb;margin-bottom:14px;">기록이 없습니다</div>
+      <div id="emptyMsg" style="font-size:14px;color:#bbb;margin-bottom:14px;">기록이 없습니다</div>
       <button id="addRecordBtn" onclick="showAddForm()" style="
         display:inline-flex;align-items:center;gap:6px;
         padding:12px 28px;
@@ -1315,30 +1315,69 @@ function checkSaveBtn() {
 }
 
 function showAddForm() {
+  document.getElementById('emptyMsg').style.display = 'none';
   document.getElementById('addRecordBtn').style.display = 'none';
   document.getElementById('addRecordForm').style.display = 'block';
 }
+
+// 저장된 값 보관
+let savedData = { period: false, weight: '', memo: '' };
 
 function saveRecord() {
   const toggle = document.querySelector('#addRecordForm .toggle-switch');
   const weight = document.querySelector('#addRecordForm input[type="text"]');
   const memo = document.querySelector('#addRecordForm textarea');
   
-  document.getElementById('addRecordForm').style.display = 'none';
+  savedData.period = toggle && toggle.classList.contains('on');
+  savedData.weight = weight ? weight.value.trim() : '';
+  savedData.memo = memo ? memo.value.trim() : '';
   
-  let html = '<h3>📋 3월 7일 (토)</h3>';
-  if (toggle && toggle.classList.contains('on')) {
+  showSavedView();
+}
+
+function showSavedView() {
+  document.getElementById('addRecordForm').style.display = 'none';
+  document.getElementById('addRecordBtn').style.display = 'none';
+  document.getElementById('emptyMsg').style.display = 'none';
+  
+  let savedDiv = document.getElementById('savedView');
+  if (!savedDiv) {
+    savedDiv = document.createElement('div');
+    savedDiv.id = 'savedView';
+    document.querySelector('.day-detail').appendChild(savedDiv);
+  }
+  
+  let html = '';
+  if (savedData.period) {
     html += '<div class="day-detail-row"><span>🩸 생리</span><span class="val" style="color:#c77d9a;">시작일</span></div>';
   }
-  if (weight && weight.value.trim()) {
-    html += '<div class="day-detail-row"><span>⚖️ 체중</span><span class="val">' + weight.value.trim() + ' kg</span></div>';
+  if (savedData.weight) {
+    html += '<div class="day-detail-row"><span>⚖️ 체중</span><span class="val">' + savedData.weight + ' kg</span></div>';
   }
-  if (memo && memo.value.trim()) {
-    html += '<div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:6px;"><span>📝 메모</span><div style="font-size:13px;color:#666;background:#f8f8f8;padding:10px;border-radius:8px;">' + memo.value.trim() + '</div></div>';
+  if (savedData.memo) {
+    html += '<div class="day-detail-row" style="flex-direction:column;align-items:stretch;gap:6px;"><span>📝 메모</span><div style="font-size:13px;color:#666;background:#f8f8f8;padding:10px;border-radius:8px;">' + savedData.memo + '</div></div>';
   }
+  html += '<button onclick="editRecord()" style="width:100%;margin-top:12px;padding:10px;background:none;border:1px solid #e0d5da;border-radius:12px;font-size:13px;color:#999;cursor:pointer;">✏️ 수정</button>';
   
-  const detail = document.querySelector('.day-detail');
-  detail.innerHTML = html;
+  savedDiv.innerHTML = html;
+  savedDiv.style.display = 'block';
+}
+
+function editRecord() {
+  document.getElementById('savedView').style.display = 'none';
+  document.getElementById('addRecordForm').style.display = 'block';
+  
+  // 기존 값 복원
+  const toggle = document.querySelector('#addRecordForm .toggle-switch');
+  const weight = document.querySelector('#addRecordForm input[type="text"]');
+  const memo = document.querySelector('#addRecordForm textarea');
+  
+  if (savedData.period) toggle.classList.add('on');
+  else toggle.classList.remove('on');
+  if (weight) weight.value = savedData.weight;
+  if (memo) memo.value = savedData.memo;
+  
+  checkSaveBtn();
 }
 
 function toggleCycleView(btn, view) {
