@@ -620,35 +620,35 @@
     color: #999;
   }
 
-  /* ===== AD BANNER ===== */
-  .ad-banner {
-    position: fixed;
-    bottom: 56px;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background: #f5f5f5;
-    border-top: 1px solid #eee;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 98;
-  }
-
-  /* ===== BOTTOM TAB BAR ===== */
-  .tab-bar {
+  /* ===== FIXED BOTTOM AREA ===== */
+  .fixed-bottom {
     position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
     max-width: 393px;
+    z-index: 100;
+    background: #fff;
+  }
+
+  /* ===== AD BANNER ===== */
+  .ad-banner {
+    height: 50px;
+    background: #f5f5f5;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===== BOTTOM TAB BAR ===== */
+  .tab-bar {
     display: flex;
     justify-content: space-around;
     background: #fff;
     border-top: 1px solid #eee;
     padding: 8px 0 20px;
-    z-index: 100;
   }
   .tab-item {
     text-align: center;
@@ -1144,14 +1144,13 @@
   </div>
 </div>
 
-<!-- ===== AD BANNER ===== -->
-<div class="ad-banner">
-  <span style="font-size:11px;color:#999;letter-spacing:1px;">AD</span>
-  <span style="font-size:12px;color:#bbb;margin-left:8px;">광고 영역 (AdMob 배너)</span>
-</div>
-
-<!-- ===== BOTTOM TAB BAR ===== -->
-<div class="tab-bar">
+<!-- ===== FIXED BOTTOM (AD + TAB) ===== -->
+<div class="fixed-bottom">
+  <div class="ad-banner">
+    <span style="font-size:11px;color:#999;letter-spacing:1px;">AD</span>
+    <span style="font-size:12px;color:#bbb;margin-left:8px;">광고 영역 (AdMob 배너)</span>
+  </div>
+  <div class="tab-bar">
   <div class="tab-item active" onclick="showScreen('home')">
     <div class="tab-icon">🏠</div>
     <div class="tab-label">홈</div>
@@ -1168,7 +1167,8 @@
     <div class="tab-icon">🌸</div>
     <div class="tab-label">MY</div>
   </div>
-</div>
+</div><!-- end tab-bar -->
+</div><!-- end fixed-bottom -->
 
 <script>
 const screens = ['home', 'calendar', 'cycle', 'settings'];
